@@ -1,0 +1,22 @@
+{
+  "scan": {
+    "x": 100,
+    "y": 100
+  },
+  "detector": {
+    "x": 32,
+    "y": 32
+  },
+  "calibration": {
+    "q_pixel_size": 0.15682791471481322,
+    "q_pixel_units": "A^-1",
+    "r_pixel_size": 6.0,
+    "r_pixel_units": "nm"
+  },
+  "compand": {
+    "knee": 527022.5408,
+    "vmax": 2635112704.0,
+    "denom": 8.517393171418904
+  },
+  "sample": "NiCu alloy"
+}

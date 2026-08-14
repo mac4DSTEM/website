@@ -120,6 +120,17 @@ summary:focus-visible {
   font-weight: 600;
   letter-spacing: -0.02em;
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.masthead-mark img {
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 0.3rem;
+  display: block;
+  flex: none;
 }
 
 .masthead-mark em { font-style: normal; color: var(--amber); }
