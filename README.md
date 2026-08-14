@@ -26,7 +26,6 @@ opening `index.html` directly from the filesystem will not load the stylesheet.
 | `privacy.html` | Privacy policy. |
 | `support.html` | Support, requirements, and known limitations. |
 | `impressum.html` | Provider identification (§ 5 DDG). |
-| `404.html` | Custom not-found page. |
 | `assets/site.css` | Styling shared across all pages. |
 | `assets/demo.js` | The interactive virtual-imaging demo. |
 | `tools/export_atlas.py` | Regenerates the demo dataset. Development only. |
