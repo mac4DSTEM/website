@@ -1,0 +1,284 @@
+/* mac4dstem.com — shared styles. No build step, no dependencies, no web fonts. */
+
+:root {
+  --ash:    #E4E6E4;
+  --panel:  #F2F3F1;
+  --ink:    #15171A;
+  --muted:  #62676C;
+  --hair:   #C9CCC9;
+  --amber:  #9A6B08;
+  --spot:   21, 23, 26;
+
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+  --measure: 66rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ash:   #121316;
+    --panel: #1A1C20;
+    --ink:   #E7E9E7;
+    --muted: #9AA0A6;
+    --hair:  #2C3034;
+    --amber: #D9A441;
+    --spot:  231, 233, 231;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--ash);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--amber); color: var(--ash); }
+
+.wrap {
+  width: 100%;
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---- skip link ---- */
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--ink);
+  color: var(--ash);
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  padding: 0.6rem 1rem;
+  z-index: 10;
+}
+
+.skip:focus { left: 0.5rem; top: 0.5rem; }
+
+/* ---- links ---- */
+
+a { color: inherit; }
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.u-link {
+  text-decoration: none;
+  border-bottom: 1px solid var(--amber);
+  padding-bottom: 0.12rem;
+  transition: color 0.15s ease;
+}
+
+.u-link:hover { color: var(--amber); }
+
+/* ---- masthead ---- */
+
+.masthead {
+  border-bottom: 1px solid var(--hair);
+}
+
+.masthead > .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding-block: 1.1rem;
+}
+
+.masthead-mark {
+  font-family: var(--mono);
+  font-size: 0.92rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+}
+
+.masthead-mark em { font-style: normal; color: var(--amber); }
+
+.masthead nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.masthead nav a {
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.masthead nav a:hover { color: var(--ink); }
+
+/* ---- shared type ---- */
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1.5rem;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: var(--amber);
+  flex: none;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  margin: 0 0 1.6rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--hair);
+}
+
+/* ---- footer ---- */
+
+.site-footer {
+  border-top: 1px solid var(--hair);
+  margin-top: clamp(3.5rem, 9vw, 6rem);
+}
+
+.site-footer > .wrap {
+  padding-block: 1.6rem clamp(2rem, 5vw, 3rem);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.11em;
+  color: var(--muted);
+}
+
+.site-footer nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.site-footer a {
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.site-footer a:hover { color: var(--ink); }
+
+/* ---- document pages (privacy / support / impressum) ---- */
+
+.doc {
+  padding-block: clamp(2.5rem, 7vw, 4.5rem) 0;
+  max-width: 44rem;
+}
+
+.doc h1 {
+  font-family: var(--mono);
+  font-size: clamp(1.6rem, 4.5vw, 2.2rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin: 0 0 0.75rem;
+}
+
+.doc .updated {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin: 0 0 2.5rem;
+}
+
+.doc h2 {
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  margin: 2.6rem 0 0.7rem;
+}
+
+.doc h2:first-of-type { margin-top: 0; }
+
+.doc p, .doc li { color: var(--muted); }
+
+.doc p { margin: 0 0 1rem; max-width: 62ch; }
+
+.doc ul { margin: 0 0 1rem; padding-left: 1.1rem; max-width: 62ch; }
+
+.doc li { margin-bottom: 0.45rem; }
+
+.doc strong { color: var(--ink); font-weight: 600; }
+
+.doc a { color: var(--ink); }
+
+.doc .lede {
+  color: var(--ink);
+  font-size: 1.08rem;
+  line-height: 1.5;
+  margin-bottom: 2rem;
+}
+
+.callout {
+  background: var(--panel);
+  border: 1px solid var(--hair);
+  border-left: 2px solid var(--amber);
+  padding: 1.1rem 1.25rem;
+  margin: 0 0 1.5rem;
+}
+
+.callout p:last-child { margin-bottom: 0; }
+
+.contact-block {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  line-height: 1.9;
+  background: var(--panel);
+  border: 1px solid var(--hair);
+  padding: 1.1rem 1.25rem;
+  margin: 0 0 1.5rem;
+  color: var(--ink);
+}

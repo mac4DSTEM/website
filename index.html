@@ -3,42 +3,34 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>mac4DSTEM — native 4D-STEM analysis for Apple silicon</title>
-<meta name="description" content="mac4DSTEM is a native macOS application for 4D-STEM data analysis. In development.">
-<meta name="color-scheme" content="light">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F2F3F1'/%3E%3Ccircle cx='16' cy='16' r='4.5' fill='%2315171A'/%3E%3Ccircle cx='16' cy='5' r='1.9' fill='%2315171A'/%3E%3Ccircle cx='16' cy='27' r='1.9' fill='%2315171A'/%3E%3Ccircle cx='6.5' cy='10.5' r='1.9' fill='%2315171A'/%3E%3Ccircle cx='25.5' cy='10.5' r='1.9' fill='%2315171A'/%3E%3Ccircle cx='6.5' cy='21.5' r='1.9' fill='%2315171A'/%3E%3Ccircle cx='25.5' cy='21.5' r='1.9' fill='%2315171A'/%3E%3C/svg%3E">
+<meta name="description" content="mac4DSTEM is a free, native macOS application for interactive 4D-STEM analysis: virtual imaging, Bragg disk detection, strain and orientation mapping, and phase reconstruction, running on the GPU in your laptop.">
+<link rel="canonical" href="https://www.mac4dstem.com/">
+<meta name="color-scheme" content="light dark">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="mac4DSTEM">
+<meta property="og:url" content="https://www.mac4dstem.com/">
+<meta property="og:title" content="mac4DSTEM — native 4D-STEM analysis for Apple silicon">
+<meta property="og:description" content="A free, native macOS application for interactive 4D-STEM analysis. Virtual imaging, strain and orientation mapping, and phase reconstruction on the GPU in your laptop.">
+<meta property="og:image" content="https://www.mac4dstem.com/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The mac4DSTEM strain-mapping workspace on macOS.">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/icon-512.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+<link rel="stylesheet" href="/assets/site.css">
 
 <style>
-  :root {
-    --ash:    #E4E6E4;
-    --panel:  #F2F3F1;
-    --ink:    #15171A;
-    --muted:  #6B7075;
-    --hair:   #C9CCC9;
-    --amber:  #B37D0A;
+  /* ---- hero ---- */
 
-    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
-    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  }
-
-  * { box-sizing: border-box; }
-
-  html, body { margin: 0; padding: 0; }
-
-  body {
-    background: var(--ash);
-    color: var(--ink);
-    font-family: var(--sans);
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-    display: flex;
-    justify-content: center;
-    padding: clamp(1.5rem, 5vw, 4rem) 1.5rem;
-  }
-
-  .page {
-    width: 100%;
-    max-width: 61rem;
+  .hero {
+    padding-block: clamp(2.5rem, 8vw, 5.5rem) clamp(2.5rem, 7vw, 4.5rem);
     display: grid;
     grid-template-columns: 1fr;
     gap: clamp(2.5rem, 6vw, 4rem);
@@ -46,34 +38,10 @@
   }
 
   @media (min-width: 56rem) {
-    .page {
-      grid-template-columns: 1fr minmax(20rem, 27rem);
+    .hero {
+      grid-template-columns: 1fr minmax(19rem, 25rem);
       align-items: center;
-      min-height: 78vh;
     }
-  }
-
-  /* ---- type ---- */
-
-  .eyebrow {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--muted);
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    margin: 0 0 1.6rem;
-  }
-
-  .eyebrow::before {
-    content: "";
-    width: 0.42rem;
-    height: 0.42rem;
-    border-radius: 50%;
-    background: var(--amber);
-    flex: none;
   }
 
   .wordmark {
@@ -85,79 +53,50 @@
     margin: 0 0 1.1rem;
   }
 
-  .wordmark em {
-    font-style: normal;
-    color: var(--amber);
-  }
+  .wordmark em { font-style: normal; color: var(--amber); }
 
   .tagline {
-    font-size: clamp(1.05rem, 2.4vw, 1.3rem);
-    line-height: 1.4;
-    margin: 0 0 1.6rem;
-    max-width: 26ch;
+    font-size: clamp(1.1rem, 2.4vw, 1.35rem);
+    line-height: 1.35;
+    margin: 0 0 1.5rem;
+    max-width: 24ch;
+    letter-spacing: -0.01em;
   }
 
-  .body-copy {
+  .lede {
     color: var(--muted);
-    max-width: 46ch;
-    margin: 0 0 2rem;
-    font-size: 0.97rem;
+    max-width: 48ch;
+    margin: 0 0 1.9rem;
+    font-size: 1rem;
   }
 
-  /* ---- capability list ---- */
-
-  .caps {
+  .specs {
     list-style: none;
-    margin: 0 0 2.4rem;
-    padding: 0;
-    border-top: 1px solid var(--hair);
-    max-width: 30rem;
-  }
-
-  .caps li {
-    border-bottom: 1px solid var(--hair);
-    padding: 0.62rem 0;
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.02em;
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    color: var(--ink);
-  }
-
-  .caps span {
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    font-size: 0.66rem;
-    align-self: center;
-  }
-
-  /* ---- links ---- */
-
-  .links {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.6rem;
+    gap: 0.45rem;
+    margin: 0 0 2rem;
+    padding: 0;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  .specs li {
+    border: 1px solid var(--hair);
+    padding: 0.32rem 0.6rem;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
     font-family: var(--mono);
     font-size: 0.8rem;
-  }
-
-  .links a {
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid var(--amber);
-    padding-bottom: 0.15rem;
-    transition: color 0.15s ease;
-  }
-
-  .links a:hover { color: var(--amber); }
-
-  a:focus-visible {
-    outline: 2px solid var(--amber);
-    outline-offset: 3px;
-    border-radius: 2px;
+    margin: 0;
   }
 
   /* ---- diffraction panel ---- */
@@ -168,6 +107,7 @@
     padding: 0.9rem;
     display: grid;
     gap: 0.75rem;
+    margin: 0;
     justify-self: stretch;
   }
 
@@ -180,10 +120,10 @@
 
   .panel figcaption {
     font-family: var(--mono);
-    font-size: 0.65rem;
+    font-size: 0.63rem;
     line-height: 1.5;
     text-transform: uppercase;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.11em;
     color: var(--muted);
     display: flex;
     justify-content: space-between;
@@ -192,81 +132,496 @@
     padding-top: 0.7rem;
   }
 
-  footer {
-    grid-column: 1 / -1;
-    border-top: 1px solid var(--hair);
-    padding-top: 1.1rem;
+  /* ---- sections ---- */
+
+  .band { padding-block: clamp(2.75rem, 7vw, 4.5rem); }
+
+  .band-rule { border-top: 1px solid var(--hair); }
+
+  /* ---- screenshot ---- */
+
+  .shot { margin: 0; }
+
+  .shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .shot figcaption {
     font-family: var(--mono);
     font-size: 0.68rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
+    line-height: 1.6;
     color: var(--muted);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0.8rem;
+    max-width: 58ch;
+    margin-top: 1.4rem;
   }
+
+  .shot figcaption a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--amber);
+    white-space: nowrap;
+  }
+
+  .band-note {
+    margin: 2rem 0 0;
+    color: var(--muted);
+    font-size: 0.88rem;
+    max-width: 60ch;
+  }
+
+  /* ---- capabilities ---- */
+
+  .caps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 46rem) {
+    .caps { grid-template-columns: 1fr 1fr; column-gap: clamp(2rem, 5vw, 4rem); }
+  }
+
+  .caps li {
+    border-top: 1px solid var(--hair);
+    padding: 1rem 0;
+  }
+
+  .caps h3 {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin: 0 0 0.35rem;
+  }
+
+  .caps p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    max-width: 44ch;
+  }
+
+  /* ---- provenance ---- */
+
+  .prov {
+    display: grid;
+    gap: clamp(1.75rem, 4vw, 3rem);
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 52rem) {
+    .prov { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+  }
+
+  .prov p {
+    color: var(--muted);
+    margin: 0 0 1rem;
+    max-width: 52ch;
+  }
+
+  .prov p:last-child { margin-bottom: 0; }
+
+  .prov strong { color: var(--ink); font-weight: 600; }
+
+  .facts {
+    margin: 0;
+    font-family: var(--mono);
+    font-size: 0.75rem;
+  }
+
+  .facts div {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    border-top: 1px solid var(--hair);
+    padding: 0.7rem 0;
+  }
+
+  .facts dt {
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.66rem;
+  }
+
+  .facts dd { margin: 0; text-align: right; }
+
+  /* ---- availability ---- */
+
+  .steps {
+    list-style: none;
+    counter-reset: step;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 46rem) {
+    .steps { grid-template-columns: repeat(3, 1fr); column-gap: clamp(1.5rem, 4vw, 3rem); }
+  }
+
+  .steps li {
+    counter-increment: step;
+    border-top: 1px solid var(--hair);
+    padding: 1rem 0 0;
+  }
+
+  .steps h3 {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin: 0 0 0.4rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.55rem;
+  }
+
+  .steps h3::before {
+    content: counter(step, decimal-leading-zero);
+    color: var(--muted);
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+  }
+
+  .steps li[data-state="done"] h3::before { color: var(--amber); }
+
+  .steps p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+
+  /* ---- contact ---- */
+
+  .contact {
+    display: grid;
+    gap: 1.25rem;
+    max-width: 52ch;
+  }
+
+  .contact h2 {
+    font-size: clamp(1.3rem, 3vw, 1.7rem);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .contact p { margin: 0; color: var(--muted); }
+
+  .contact .mail {
+    font-family: var(--mono);
+    font-size: clamp(1rem, 2.4vw, 1.2rem);
+    text-decoration: none;
+    border-bottom: 1px solid var(--amber);
+    padding-bottom: 0.15rem;
+    justify-self: start;
+    transition: color 0.15s ease;
+  }
+
+  .contact .mail:hover { color: var(--amber); }
 </style>
 </head>
 
 <body>
-<main class="page">
+<a class="skip" href="#main">Skip to content</a>
 
-  <div>
-    <p class="eyebrow">In development</p>
+<header class="masthead">
+  <div class="wrap">
+    <a class="masthead-mark" href="/">mac<em>4D</em>STEM</a>
+    <nav aria-label="Sections">
+      <a href="#workspace">Workspace</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#validation">Validation</a>
+      <a href="#availability">Availability</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
 
-    <h1 class="wordmark">mac<em>4D</em>STEM</h1>
+<main id="main">
 
-    <p class="tagline">Four-dimensional STEM analysis, native on Apple silicon.</p>
+  <!-- ---------- hero ---------- -->
 
-    <p class="body-copy">
-      A macOS application for working with 4D-STEM datasets end to end — built on Metal
-      and MLX so reconstruction runs on the GPU in your laptop rather than on a cluster.
-      Free, and coming to the App Store.
-    </p>
+  <div class="wrap">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Version 1.0 — release in preparation</p>
 
-    <ul class="caps">
-      <li>Virtual imaging <span>Bright / dark field</span></li>
-      <li>Orientation mapping <span>ACOM</span></li>
-      <li>Strain mapping <span>Bragg vectors</span></li>
-      <li>Phase reconstruction <span>Ptychography</span></li>
-    </ul>
+        <h1 class="wordmark">mac<em>4D</em>STEM</h1>
 
-    <p class="links">
-      <a href="https://github.com/mac4DSTEM">Source on GitHub</a>
-      <a href="mailto:mail@mac4dstem.com">Get in touch</a>
-    </p>
+        <p class="tagline">Four-dimensional STEM analysis, native on Apple silicon.</p>
+
+        <p class="lede">
+          A macOS application that takes 4D-STEM datasets from raw detector frames to
+          calibrated strain, orientation, and phase maps — interactively. Detector geometry
+          and reconstruction parameters are adjusted against a live view of the data, so the
+          effect of a decision is visible as it is made rather than after a batch run finishes.
+        </p>
+
+        <ul class="specs">
+          <li>macOS 14+</li>
+          <li>Apple silicon</li>
+          <li>Metal &amp; MLX</li>
+          <li>GPL-3.0</li>
+          <li>Free</li>
+        </ul>
+
+        <p class="actions">
+          <a class="u-link" href="#workspace">See the workspace</a>
+          <a class="u-link" href="mailto:mail@mac4dstem.com">Get in touch</a>
+        </p>
+      </div>
+
+      <figure class="panel">
+        <canvas id="dp" aria-label="An interactive simulated electron diffraction pattern. Moving the pointer across it changes the illumination tilt, brightening different reflections."></canvas>
+        <figcaption>
+          <span>Simulated pattern</span>
+          <span>Move pointer to tilt</span>
+        </figcaption>
+      </figure>
+    </section>
   </div>
 
-  <figure class="panel">
-    <canvas id="dp" aria-label="An interactive simulated electron diffraction pattern. Moving the pointer across it changes the illumination tilt, brightening different reflections."></canvas>
-    <figcaption>
-      <span>Simulated pattern</span>
-      <span id="hint">Move pointer to tilt</span>
-    </figcaption>
-  </figure>
+  <!-- ---------- screenshot ---------- -->
 
-  <footer>
-    <span>Siegen, Germany</span>
-    <span>Site under construction</span>
-  </footer>
+  <div class="wrap">
+    <section class="band band-rule" id="workspace" aria-labelledby="workspace-h">
+      <h2 class="section-label" id="workspace-h">The workspace</h2>
+
+      <figure class="shot">
+        <picture>
+          <source
+            type="image/webp"
+            srcset="/assets/workspace.webp 1200w, /assets/workspace@2x.webp 2400w"
+            sizes="(min-width: 66rem) 60rem, 100vw">
+          <img
+            src="/assets/workspace.png"
+            width="1600" height="1046"
+            alt="The mac4DSTEM strain workspace. A convergent-beam diffraction pattern with detected Bragg disks and lattice fit overlay sits beside the resulting epsilon-xx strain map, with dataset metadata, calibration, and fit diagnostics in side panels."
+            loading="lazy" decoding="async">
+        </picture>
+        <figcaption>
+          Strain mapping on an experimental Si/SiGe dataset. The diffraction view shows measured
+          disks, the local lattice fit, and the reference basis; the map beside it updates from the
+          same fit. Basis consensus, residual, and indexed fraction are reported alongside every
+          result rather than left implicit.
+          <a href="/assets/workspace@2x.webp">Open full size&nbsp;↗</a>
+        </figcaption>
+      </figure>
+    </section>
+  </div>
+
+  <!-- ---------- capabilities ---------- -->
+
+  <div class="wrap">
+    <section class="band band-rule" id="capabilities" aria-labelledby="capabilities-h">
+      <h2 class="section-label" id="capabilities-h">Capabilities</h2>
+
+      <ul class="caps">
+        <li>
+          <h3>Data exploration</h3>
+          <p>Real and reciprocal space presented together, with calibrated scale bars, contrast control, and GPU-rendered CBED display.</p>
+        </li>
+        <li>
+          <h3>Virtual imaging</h3>
+          <p>Bright-field, annular dark-field, and HAADF geometries, plus arbitrary annular, rectangular, and point detectors positioned interactively on the diffraction plane.</p>
+        </li>
+        <li>
+          <h3>Calibration</h3>
+          <p>Probe and origin fitting across the scan, elliptical distortion correction, real–reciprocal rotation, and reciprocal-space sampling against a known crystal.</p>
+        </li>
+        <li>
+          <h3>Bragg disk detection</h3>
+          <p>GPU cross-correlation with parabolic and DFT-upsampled subpixel refinement, and live acceptance diagnostics.</p>
+        </li>
+        <li>
+          <h3>Strain mapping</h3>
+          <p>Robust local lattice fitting against a whole-scan or region reference, with basis consensus, residual, and indexed fraction reported alongside every map.</p>
+        </li>
+        <li>
+          <h3>Orientation mapping</h3>
+          <p>Polar-correlation template matching against a validated crystal catalogue or an imported CIF, with reliability and inverse-pole-figure output.</p>
+        </li>
+        <li>
+          <h3>Phase reconstruction</h3>
+          <p>DPC, iDPC, parallax, and single-slice ptychography.</p>
+        </li>
+        <li>
+          <h3>Interoperability</h3>
+          <p>EMD export of Bragg vectors, calibrated datacubes, and preprocessed products, readable directly in py4DSTEM.</p>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <!-- ---------- validation ---------- -->
+
+  <div class="wrap">
+    <section class="band band-rule" id="validation" aria-labelledby="validation-h">
+      <h2 class="section-label" id="validation-h">Provenance and validation</h2>
+
+      <div class="prov">
+        <div>
+          <p>
+            The analysis algorithms are ported from
+            <a class="u-link" href="https://github.com/py4dstem/py4DSTEM">py4DSTEM</a> and measured
+            against it on experimental datasets, so results are traceable to the established
+            reference implementation in the field. Work published using mac4DSTEM should cite
+            py4DSTEM for the underlying methods.
+          </p>
+          <p>
+            Every quantity carries its calibration and provenance through display, export, and
+            reopening. <strong>Where a measurement is not quantitatively supported, the result is
+            labelled accordingly</strong> rather than presented as though it were.
+          </p>
+          <p>
+            That verification is numerical — the application is tested against known-correct
+            values, not against its rendered output.
+          </p>
+        </div>
+
+        <dl class="facts">
+          <div>
+            <dt>Reference</dt>
+            <dd>py4DSTEM 0.14.19</dd>
+          </div>
+          <div>
+            <dt>Test suites</dt>
+            <dd>30 automated</dd>
+          </div>
+          <div>
+            <dt>Parity harnesses</dt>
+            <dd>Experimental data</dd>
+          </div>
+          <div>
+            <dt>Export</dt>
+            <dd>EMD (py4DSTEM-readable)</dd>
+          </div>
+          <div>
+            <dt>Runtime</dt>
+            <dd>Self-contained</dd>
+          </div>
+          <div>
+            <dt>Licence</dt>
+            <dd>GPL-3.0</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+  </div>
+
+  <!-- ---------- availability ---------- -->
+
+  <div class="wrap">
+    <section class="band band-rule" id="availability" aria-labelledby="availability-h">
+      <h2 class="section-label" id="availability-h">Availability</h2>
+
+      <ol class="steps">
+        <li data-state="done">
+          <h3>Version 1.0 complete</h3>
+          <p>The analysis workflow is finished and covered by automated tests, including parity harnesses measured against py4DSTEM on experimental data.</p>
+        </li>
+        <li>
+          <h3>Source release</h3>
+          <p>The source is being prepared for public release on GitHub under GPL-3.0. This page will link to it when it is up.</p>
+        </li>
+        <li>
+          <h3>Mac App Store</h3>
+          <p>Distribution through the App Store is planned for a later stage. The application will remain free.</p>
+        </li>
+      </ol>
+
+      <p class="band-note">
+        Requires macOS 14 or later on Apple silicon. No external runtime, toolchain, or library
+        installation is needed — all dependencies are contained within the application. The Merlin
+        MIB and EMPAD RAW readers are preview-grade pending further vendor data.
+      </p>
+    </section>
+  </div>
+
+  <!-- ---------- contact ---------- -->
+
+  <div class="wrap">
+    <section class="band band-rule" id="contact" aria-labelledby="contact-h">
+      <div class="contact">
+        <h2 id="contact-h">Enquiries, issue reports, and collaboration</h2>
+        <p>
+          If you work with 4D-STEM data and something here is useful — or missing — I would like
+          to hear about it.
+        </p>
+        <a class="mail" href="mailto:mail@mac4dstem.com">mail@mac4dstem.com</a>
+      </div>
+    </section>
+  </div>
 
 </main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Siegen, Germany</span>
+    <nav aria-label="Legal and support">
+      <a href="/support.html">Support</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/impressum.html">Impressum</a>
+    </nav>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "mac4DSTEM",
+  "url": "https://www.mac4dstem.com/",
+  "applicationCategory": "ScientificApplication",
+  "operatingSystem": "macOS 14 or later, Apple silicon",
+  "softwareVersion": "1.0.0",
+  "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "description": "A free, native macOS application for interactive 4D-STEM analysis: virtual imaging, Bragg disk detection, strain and orientation mapping, and phase reconstruction, computed on the GPU.",
+  "screenshot": "https://www.mac4dstem.com/assets/workspace.png",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "EUR"
+  }
+}
+</script>
 
 <script>
 (() => {
   const canvas = document.getElementById('dp');
+  if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let reduced = motion.matches;
 
   let W = 0, H = 0;
   const tilt = { x: 0, y: 0 };
   const target = { x: 0, y: 0 };
   let rot = 0.22;
 
+  // Spot colour tracks the theme, read from the --spot custom property.
+  let spotRGB = '21, 23, 26';
+  function readTheme() {
+    const v = getComputedStyle(document.documentElement).getPropertyValue('--spot').trim();
+    if (v) spotRGB = v;
+  }
+
   function resize() {
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     const rect = canvas.getBoundingClientRect();
+    if (!rect.width) return;
     W = rect.width;
     H = rect.width; // square
     canvas.width = Math.round(W * dpr);
@@ -277,9 +632,9 @@
 
   function spot(x, y, r, alpha) {
     const g = ctx.createRadialGradient(x, y, 0, x, y, r);
-    g.addColorStop(0, `rgba(21,23,26,${alpha})`);
-    g.addColorStop(0.55, `rgba(21,23,26,${alpha * 0.55})`);
-    g.addColorStop(1, 'rgba(21,23,26,0)');
+    g.addColorStop(0, `rgba(${spotRGB},${alpha})`);
+    g.addColorStop(0.55, `rgba(${spotRGB},${alpha * 0.55})`);
+    g.addColorStop(1, `rgba(${spotRGB},0)`);
     ctx.fillStyle = g;
     ctx.beginPath();
     ctx.arc(x, y, r, 0, Math.PI * 2);
@@ -329,6 +684,8 @@
   }
 
   let queued = false;
+  let running = false;
+
   function schedule() {
     if (queued) return;
     queued = true;
@@ -340,7 +697,7 @@
     tilt.y += (target.y - tilt.y) * 0.12;
     if (!reduced) rot += 0.0009;
     draw();
-    if (!reduced) schedule();
+    if (running && !reduced) schedule();
   }
 
   function onPointer(e) {
@@ -355,10 +712,26 @@
   canvas.addEventListener('pointermove', onPointer);
   canvas.addEventListener('pointerleave', () => { target.x = 0; target.y = 0; });
 
-  const ro = new ResizeObserver(resize);
-  ro.observe(canvas);
+  motion.addEventListener('change', (e) => {
+    reduced = e.matches;
+    if (!reduced && running) schedule();
+  });
+
+  const scheme = window.matchMedia('(prefers-color-scheme: dark)');
+  scheme.addEventListener('change', () => { readTheme(); draw(); });
+
+  // Only animate while the panel is actually on screen.
+  new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      running = entry.isIntersecting;
+      if (running && !reduced) schedule();
+    }
+  }, { threshold: 0 }).observe(canvas);
+
+  new ResizeObserver(resize).observe(canvas);
+
+  readTheme();
   resize();
-  if (!reduced) schedule();
 })();
 </script>
 </body>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Support — mac4DSTEM</title>
+<meta name="description" content="Support for mac4DSTEM: system requirements, supported file formats, known limitations, and how to report a problem.">
+<link rel="canonical" href="https://www.mac4dstem.com/support.html">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="index, follow">
+
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/icon-512.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="masthead-mark" href="/">mac<em>4D</em>STEM</a>
+    <nav aria-label="Sections">
+      <a href="/">Home</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/impressum.html">Impressum</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <article class="doc">
+
+      <h1>Support</h1>
+      <p class="updated">Last updated 14 August 2026</p>
+
+      <p class="lede">
+        Questions, bug reports, and feature requests all go to one address. I read everything.
+      </p>
+
+      <div class="contact-block">
+        <a href="mailto:mail@mac4dstem.com">mail@mac4dstem.com</a>
+      </div>
+
+      <p>
+        mac4DSTEM is developed by one person alongside other work, so replies are not instant —
+        but every report is looked at. There is no support contract and no charge; the application
+        is free.
+      </p>
+
+      <h2>Requirements</h2>
+
+      <ul>
+        <li><strong>macOS 14 (Sonoma) or later.</strong></li>
+        <li><strong>Apple silicon</strong> — M-series Macs. Intel Macs are not supported.</li>
+        <li>No external runtime, toolchain, Python environment, or library installation. Every dependency ships inside the application bundle.</li>
+        <li>Enough free disk space for your datasets and any exported products. Memory needs scale with scan and detector size.</li>
+      </ul>
+
+      <h2>Reporting a problem</h2>
+
+      <p>
+        A report is most useful when it lets me reproduce what you saw. Where you can, include:
+      </p>
+
+      <ul>
+        <li>What you did, what you expected, and what happened instead.</li>
+        <li>The application version and your macOS version and Mac model.</li>
+        <li>The dataset's format, scan shape, and detector shape — the sidebar reports all three.</li>
+        <li>The step in the workflow where it went wrong (Prepare, Image, Map, Reconstruct, Results).</li>
+        <li>A screenshot of the window, including any diagnostics shown alongside the result.</li>
+        <li>The relevant lines from the log pane at the bottom of the window.</li>
+      </ul>
+
+      <p>
+        Please do not send datasets as email attachments. If reproducing an issue needs the data,
+        say so and we can arrange a transfer.
+      </p>
+
+      <h2>Known limitations</h2>
+
+      <ul>
+        <li>The <strong>Merlin MIB</strong> and <strong>EMPAD RAW</strong> readers are preview-grade, pending further vendor data. If a file from either detector loads incorrectly, a report with the file's header is particularly valuable.</li>
+        <li>Verification is numerical: the application is tested against known-correct values rather than against its rendered output.</li>
+        <li>Where a measurement is not quantitatively supported, the result is labelled as such in the interface. Those labels are deliberate — treat them as part of the result.</li>
+      </ul>
+
+      <h2>Results and interoperability</h2>
+
+      <p>
+        Bragg vectors, calibrated datacubes, and preprocessed products export to <strong>EMD</strong>
+        and can be read directly in
+        <a class="u-link" href="https://github.com/py4dstem/py4DSTEM">py4DSTEM</a>. If you need a
+        result in a format that is not currently offered, that is a reasonable thing to ask for.
+      </p>
+
+      <h2>Citing the methods</h2>
+
+      <p>
+        The analysis algorithms are ported from py4DSTEM and validated against it. Work published
+        using mac4DSTEM should cite py4DSTEM for the underlying methods.
+      </p>
+
+      <h2>Licence</h2>
+
+      <p>
+        mac4DSTEM is released under the
+        <a class="u-link" href="https://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License v3.0</a>.
+        It is free software, provided without warranty of any kind.
+      </p>
+
+    </article>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Siegen, Germany</span>
+    <nav aria-label="Legal and support">
+      <a href="/support.html">Support</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/impressum.html">Impressum</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
