@@ -153,6 +153,24 @@ summary:focus-visible {
 
 .masthead nav a:hover { color: var(--ink); }
 
+/* The one action on the page. Amber outline rather than a filled block: the
+   rest of the site is typographic and restrained, so a loud button would read
+   as an advert. Negative margin keeps the masthead row the same height it was
+   before the pill was added. */
+.masthead nav a.nav-download {
+  color: var(--amber);
+  border: 1px solid var(--amber);
+  border-radius: 999px;
+  padding: 0.42rem 0.9rem;
+  margin-block: -0.42rem;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.masthead nav a.nav-download:hover {
+  background: var(--amber);
+  color: var(--ash);
+}
+
 /* ---- shared type ---- */
 
 .eyebrow {

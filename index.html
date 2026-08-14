@@ -91,6 +91,51 @@
     padding: 0.32rem 0.6rem;
   }
 
+  /* ---- hero download ---- */
+
+  .get {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.15rem;
+    margin: 2rem 0 1.75rem;
+  }
+
+  /* Filled rather than outlined, so it carries weight the nav pill does not —
+     but in the site's own mono/uppercase idiom, so it reads as part of the
+     design rather than a marketing button dropped on top of it. */
+  .get-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    color: var(--ash);
+    background: var(--amber);
+    border: 1px solid var(--amber);
+    border-radius: 999px;
+    padding: 0.8rem 1.5rem;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  .get-btn:hover {
+    background: transparent;
+    color: var(--amber);
+  }
+
+  .get-btn span[aria-hidden] { font-size: 0.95em; }
+
+  .get-meta {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    margin: 0;
+  }
+
 
   /* ---- sections ---- */
 
@@ -441,6 +486,7 @@
       <a href="#validation">Validation</a>
       <a href="#availability">Availability</a>
       <a href="#contact">Contact</a>
+      <a class="nav-download" href="https://github.com/mac4DSTEM/mac4DSTEM/releases/latest/download/mac4DSTEM.dmg">Download</a>
     </nav>
   </div>
 </header>
@@ -451,7 +497,7 @@
 
   <div class="wrap">
     <section class="hero">
-      <p class="eyebrow">Version 1.0 — release in preparation</p>
+      <p class="eyebrow">Version 1.0 — available now</p>
 
       <div class="hero-head">
         <img class="hero-logo" src="/assets/icon-512.png" alt="" width="512" height="512">
@@ -464,6 +510,13 @@
         A macOS application that takes 4D-STEM datasets from raw detector frames to calibrated
         strain, orientation, and phase maps — interactively, against a live view of the data.
       </p>
+
+      <div class="get">
+        <a class="get-btn" href="https://github.com/mac4DSTEM/mac4DSTEM/releases/latest/download/mac4DSTEM.dmg">
+          <span aria-hidden="true">↓</span> Download for macOS
+        </a>
+        <p class="get-meta">Version 1.0 · 4.1 MB · signed and notarized</p>
+      </div>
 
       <ul class="specs">
         <li>macOS 14+</li>
@@ -669,13 +722,17 @@
           <h3>Version 1.0 complete</h3>
           <p>The analysis workflow is finished and covered by automated tests, including parity harnesses measured against py4DSTEM on experimental data.</p>
         </li>
-        <li>
+        <li data-state="done">
+          <h3>Download</h3>
+          <p>Version 1.0 is <a href="https://github.com/mac4DSTEM/mac4DSTEM/releases/latest/download/mac4DSTEM.dmg">available as a signed, notarized disk image</a>. Open it and drag mac4DSTEM to your Applications folder — it launches without a security warning, and needs nothing else installed.</p>
+        </li>
+        <li data-state="done">
           <h3>Source release</h3>
-          <p>The source is being prepared for public release on GitHub under GPL-3.0. This page will link to it when it is up.</p>
+          <p>The source is published on <a href="https://github.com/mac4DSTEM/mac4DSTEM">GitHub</a> under GPL-3.0.</p>
         </li>
         <li>
-          <h3>Mac App Store</h3>
-          <p>Distribution through the App Store is planned for a later stage. The application will remain free.</p>
+          <h3>Distribution</h3>
+          <p>Direct download only. The Mac App Store is not a route for this application: its terms are incompatible with the GPL-3.0 licence mac4DSTEM inherits from py4DSTEM. It stays free either way.</p>
         </li>
       </ol>
 
