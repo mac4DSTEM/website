@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mac4DSTEM — native 4D-STEM analysis for Apple silicon</title>
+<meta name="description" content="mac4DSTEM is a native macOS application for 4D-STEM data analysis. In development.">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F2F3F1'/%3E%3Ccircle cx='16' cy='16' r='4.5' fill='%2315171A'/%3E%3Ccircle cx='16' cy='5' r='1.9' fill='%2315171A'/%3E%3Ccircle cx='16' cy='27' r='1.9' fill='%2315171A'/%3E%3Ccircle cx='6.5' cy='10.5' r='1.9' fill='%2315171A'/%3E%3Ccircle cx='25.5' cy='10.5' r='1.9' fill='%2315171A'/%3E%3Ccircle cx='6.5' cy='21.5' r='1.9' fill='%2315171A'/%3E%3Ccircle cx='25.5' cy='21.5' r='1.9' fill='%2315171A'/%3E%3C/svg%3E">
+
+<style>
+  :root {
+    --ash:    #E4E6E4;
+    --panel:  #F2F3F1;
+    --ink:    #15171A;
+    --muted:  #6B7075;
+    --hair:   #C9CCC9;
+    --amber:  #B37D0A;
+
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { margin: 0; padding: 0; }
+
+  body {
+    background: var(--ash);
+    color: var(--ink);
+    font-family: var(--sans);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    justify-content: center;
+    padding: clamp(1.5rem, 5vw, 4rem) 1.5rem;
+  }
+
+  .page {
+    width: 100%;
+    max-width: 61rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(2.5rem, 6vw, 4rem);
+    align-content: start;
+  }
+
+  @media (min-width: 56rem) {
+    .page {
+      grid-template-columns: 1fr minmax(20rem, 27rem);
+      align-items: center;
+      min-height: 78vh;
+    }
+  }
+
+  /* ---- type ---- */
+
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin: 0 0 1.6rem;
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 0.42rem;
+    height: 0.42rem;
+    border-radius: 50%;
+    background: var(--amber);
+    flex: none;
+  }
+
+  .wordmark {
+    font-family: var(--mono);
+    font-size: clamp(2.4rem, 8vw, 3.9rem);
+    font-weight: 600;
+    letter-spacing: -0.045em;
+    line-height: 1;
+    margin: 0 0 1.1rem;
+  }
+
+  .wordmark em {
+    font-style: normal;
+    color: var(--amber);
+  }
+
+  .tagline {
+    font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+    line-height: 1.4;
+    margin: 0 0 1.6rem;
+    max-width: 26ch;
+  }
+
+  .body-copy {
+    color: var(--muted);
+    max-width: 46ch;
+    margin: 0 0 2rem;
+    font-size: 0.97rem;
+  }
+
+  /* ---- capability list ---- */
+
+  .caps {
+    list-style: none;
+    margin: 0 0 2.4rem;
+    padding: 0;
+    border-top: 1px solid var(--hair);
+    max-width: 30rem;
+  }
+
+  .caps li {
+    border-bottom: 1px solid var(--hair);
+    padding: 0.62rem 0;
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    color: var(--ink);
+  }
+
+  .caps span {
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.66rem;
+    align-self: center;
+  }
+
+  /* ---- links ---- */
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.6rem;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+  }
+
+  .links a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--amber);
+    padding-bottom: 0.15rem;
+    transition: color 0.15s ease;
+  }
+
+  .links a:hover { color: var(--amber); }
+
+  a:focus-visible {
+    outline: 2px solid var(--amber);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* ---- diffraction panel ---- */
+
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--hair);
+    padding: 0.9rem;
+    display: grid;
+    gap: 0.75rem;
+    justify-self: stretch;
+  }
+
+  .panel canvas {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    touch-action: none;
+  }
+
+  .panel figcaption {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    line-height: 1.5;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    border-top: 1px solid var(--hair);
+    padding-top: 0.7rem;
+  }
+
+  footer {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--hair);
+    padding-top: 1.1rem;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.8rem;
+  }
+</style>
+</head>
+
+<body>
+<main class="page">
+
+  <div>
+    <p class="eyebrow">In development</p>
+
+    <h1 class="wordmark">mac<em>4D</em>STEM</h1>
+
+    <p class="tagline">Four-dimensional STEM analysis, native on Apple silicon.</p>
+
+    <p class="body-copy">
+      A macOS application for working with 4D-STEM datasets end to end — built on Metal
+      and MLX so reconstruction runs on the GPU in your laptop rather than on a cluster.
+      Free, and coming to the App Store.
+    </p>
+
+    <ul class="caps">
+      <li>Virtual imaging <span>Bright / dark field</span></li>
+      <li>Orientation mapping <span>ACOM</span></li>
+      <li>Strain mapping <span>Bragg vectors</span></li>
+      <li>Phase reconstruction <span>Ptychography</span></li>
+    </ul>
+
+    <p class="links">
+      <a href="https://github.com/mac4DSTEM">Source on GitHub</a>
+      <a href="mailto:hello@mac4dstem.com">Get in touch</a>
+    </p>
+  </div>
+
+  <figure class="panel">
+    <canvas id="dp" aria-label="An interactive simulated electron diffraction pattern. Moving the pointer across it changes the illumination tilt, brightening different reflections."></canvas>
+    <figcaption>
+      <span>Simulated pattern</span>
+      <span id="hint">Move pointer to tilt</span>
+    </figcaption>
+  </figure>
+
+  <footer>
+    <span>Siegen, Germany</span>
+    <span>Site under construction</span>
+  </footer>
+
+</main>
+
+<script>
+(() => {
+  const canvas = document.getElementById('dp');
+  const ctx = canvas.getContext('2d');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let W = 0, H = 0;
+  const tilt = { x: 0, y: 0 };
+  const target = { x: 0, y: 0 };
+  let rot = 0.22;
+
+  function resize() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const rect = canvas.getBoundingClientRect();
+    W = rect.width;
+    H = rect.width; // square
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    draw();
+  }
+
+  function spot(x, y, r, alpha) {
+    const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+    g.addColorStop(0, `rgba(21,23,26,${alpha})`);
+    g.addColorStop(0.55, `rgba(21,23,26,${alpha * 0.55})`);
+    g.addColorStop(1, 'rgba(21,23,26,0)');
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function draw() {
+    if (!W) return;
+    ctx.clearRect(0, 0, W, H);
+
+    const cx = W / 2, cy = H / 2;
+    const R = Math.min(W, H) * 0.455;   // outer extent of the pattern
+    const a = R / 4.3;                  // reciprocal lattice spacing
+
+    // hexagonal reciprocal lattice — gold, [111] zone axis
+    const g1 = { x: a * Math.cos(rot), y: a * Math.sin(rot) };
+    const g2 = { x: a * Math.cos(rot + Math.PI / 3), y: a * Math.sin(rot + Math.PI / 3) };
+
+    const Kew = R / 0.7;        // Ewald sphere radius, in these units
+    const sigS = 0.26 * R;      // excitation error tolerance
+    const N = 6;
+
+    for (let h = -N; h <= N; h++) {
+      for (let k = -N; k <= N; k++) {
+        if (h === 0 && k === 0) continue;
+
+        const gx = h * g1.x + k * g2.x;
+        const gy = h * g1.y + k * g2.y;
+        const r = Math.hypot(gx, gy);
+        if (r > R) continue;
+
+        // excitation error: distance of this reflection from the Ewald sphere
+        const s = (r * r) / (2 * Kew) - (gx * tilt.x + gy * tilt.y);
+        const exc = Math.exp(-(s * s) / (2 * sigS * sigS));
+
+        // structure factor falls off with scattering angle
+        const F = Math.exp(-r / (0.95 * R));
+        const I = F * (0.10 + 0.90 * exc);
+
+        if (I < 0.012) continue;
+        spot(cx + gx, cy + gy, a * 0.20 * (0.62 + 0.38 * I), Math.min(I * 1.5, 0.92));
+      }
+    }
+
+    // direct beam
+    spot(cx, cy, a * 0.40, 0.95);
+  }
+
+  let queued = false;
+  function schedule() {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => { queued = false; step(); });
+  }
+
+  function step() {
+    tilt.x += (target.x - tilt.x) * 0.12;
+    tilt.y += (target.y - tilt.y) * 0.12;
+    if (!reduced) rot += 0.0009;
+    draw();
+    if (!reduced) schedule();
+  }
+
+  function onPointer(e) {
+    const rect = canvas.getBoundingClientRect();
+    const nx = (e.clientX - rect.left) / rect.width - 0.5;
+    const ny = (e.clientY - rect.top) / rect.height - 0.5;
+    target.x = nx * 0.80;
+    target.y = ny * 0.80;
+    if (reduced) { tilt.x = target.x; tilt.y = target.y; draw(); }
+  }
+
+  canvas.addEventListener('pointermove', onPointer);
+  canvas.addEventListener('pointerleave', () => { target.x = 0; target.y = 0; });
+
+  const ro = new ResizeObserver(resize);
+  ro.observe(canvas);
+  resize();
+  if (!reduced) schedule();
+})();
+</script>
+</body>
+</html>
