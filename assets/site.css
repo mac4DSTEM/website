@@ -153,6 +153,22 @@ summary:focus-visible {
 
 .masthead nav a:hover { color: var(--ink); }
 
+/* Source link. Carries the mark so it reads as an outbound link rather than
+   another section anchor, but stays plain text-weight — the amber pill next to
+   it must remain the only action in the row. */
+.masthead nav a.nav-source {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.masthead nav a.nav-source svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  fill: currentColor;
+  flex: none;
+}
+
 /* The one action on the page. Amber outline rather than a filled block: the
    rest of the site is typographic and restrained, so a loud button would read
    as an advert. Negative margin keeps the masthead row the same height it was
