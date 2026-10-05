@@ -36,7 +36,7 @@
     <article class="doc">
 
       <h1>Support</h1>
-      <p class="updated">Last updated 14 August 2026</p>
+      <p class="updated">Last updated 5 October 2026</p>
 
       <p class="lede">
         Questions, bug reports, and feature requests all go to one address. I read everything.
@@ -55,7 +55,7 @@
       <h2>Requirements</h2>
 
       <ul>
-        <li><strong>macOS 14 or later.</strong></li>
+        <li><strong>macOS 27 or later.</strong> For macOS 14–26, <a class="u-link" href="https://github.com/mac4DSTEM/mac4DSTEM/releases/tag/v3.0.0">version 3.0.0</a> remains available.</li>
         <li><strong>Apple silicon</strong> — M-series Macs. Intel Macs are not supported.</li>
         <li>No external runtime, toolchain, Python environment, or library installation. Every dependency ships inside the application bundle.</li>
         <li>Enough free disk space for your datasets and any exported products. Memory needs scale with scan and detector size.</li>
@@ -71,7 +71,7 @@
         <li>What you did, what you expected, and what happened instead.</li>
         <li>The application version and your macOS version and Mac model.</li>
         <li>The dataset's format, scan shape, and detector shape — the sidebar reports all three.</li>
-        <li>The step in the workflow where it went wrong (Prepare, Image, Map, Reconstruct, Results).</li>
+        <li>The step in the workflow where it went wrong (Prepare, Imaging, Bragg Disks, Crystal Maps, Reconstruction, Results).</li>
         <li>A screenshot of the window, including any diagnostics shown alongside the result.</li>
         <li>The relevant lines from the log pane at the bottom of the window.</li>
       </ul>
@@ -85,6 +85,7 @@
 
       <ul>
         <li>The <strong>Merlin MIB</strong> and <strong>EMPAD RAW</strong> readers are preview-grade, pending further vendor data. If a file from either detector loads incorrectly, a report with the file's header is particularly valuable.</li>
+        <li><strong>Velox <code>.emd</code></strong> spectrum files are not yet supported; EDX analysis is planned for version 5.</li>
         <li>Verification is numerical: the application is tested against known-correct values rather than against its rendered output.</li>
         <li>Where a measurement is not quantitatively supported, the result is labelled as such in the interface. Those labels are deliberate — treat them as part of the result.</li>
       </ul>
