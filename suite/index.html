@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kits — macEM suite</title>
+<meta name="description" content="The six Swift kits of the macEM suite: what each does, its Python reference, version and parity.">
+<link rel="canonical" href="https://mac4dstem.com/suite/">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/icon-512.png" type="image/png" sizes="512x512">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+.tablewrap{overflow-x:auto;margin:1rem 0}
+table{border-collapse:collapse;font-size:.9rem;font-variant-numeric:tabular-nums}
+th,td{padding:.3rem .7rem;border-bottom:1px solid color-mix(in srgb,currentColor 18%,transparent);text-align:left;white-space:nowrap}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap">
+    <a class="masthead-mark" href="/"><img src="/assets/icon-512.png" alt="" width="512" height="512"><span>mac<em>4D</em>STEM</span></a>
+    <nav aria-label="Sections">
+      <a href="/">Home</a>
+      <a href="/suite/">Kits</a>
+      <a href="/suite/benchmarks.html">Benchmarks</a>
+      <a href="/suite/releases.html">Releases</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="wrap">
+    <article class="doc">
+<h1>The macEM suite</h1>
+<p class="lede">Six Swift packages that port the Python electron-microscopy stack to Apple silicon, and the two Mac apps built on them. Every number is checked against the Python package it comes from, within that package's own tolerance.</p>
+<div class="tablewrap"><table><thead><tr><th>Kit</th><th>What it does</th><th>Reference</th><th>Version</th><th>Parity: present of rows</th><th>Docs</th></tr></thead><tbody>
+<tr><td><a class="u-link" href="https://github.com/mac4DSTEM/FormatoKit">FormatoKit</a></td><td>File formats for electron microscopy: Velox EMD, DM3/DM4, HDF5/EMD, MRC, TIFF, MIB, EMPAD.</td><td>RosettaSciIO</td><td>0.9.0</td><td>2 of 38</td><td><a class="u-link" href="https://mac4dstem.github.io/FormatoKit/documentation/">API</a></td></tr>
+<tr><td><a class="u-link" href="https://github.com/mac4DSTEM/ImagoKit">ImagoKit</a></td><td>Image numerics: FFT, profiles, filters, alignment, measurement, segmentation.</td><td>NumPy, SciPy, scikit-image</td><td>0.6.0</td><td>17 of 77</td><td><a class="u-link" href="https://mac4dstem.github.io/ImagoKit/documentation/">API</a></td></tr>
+<tr><td><a class="u-link" href="https://github.com/mac4DSTEM/DiffractoKit">DiffractoKit</a></td><td>Crystallography, diffraction geometry, ring and ellipse fits, indexing, orientation and ACOM.</td><td>pymatgen, py4DSTEM, orix</td><td>0.9.0</td><td>21 of 145</td><td><a class="u-link" href="https://mac4dstem.github.io/DiffractoKit/documentation/">API</a></td></tr>
+<tr><td><a class="u-link" href="https://github.com/mac4DSTEM/SpectroKit">SpectroKit</a></td><td>EDX quantification and EELS thickness, background and edges.</td><td>HyperSpy, exSpy</td><td>0.8.0</td><td>39 of 88</td><td><a class="u-link" href="https://mac4dstem.github.io/SpectroKit/documentation/">API</a></td></tr>
+<tr><td><a class="u-link" href="https://github.com/mac4DSTEM/CuboKit">CuboKit</a></td><td>The 4D-STEM library: virtual imaging, centre of mass, DPC, strain, Bragg disks, parallax, ptychography.</td><td>py4DSTEM</td><td>0.8.0</td><td>121 of 209</td><td><a class="u-link" href="https://mac4dstem.github.io/CuboKit/documentation/">API</a></td></tr>
+<tr><td><a class="u-link" href="https://github.com/mac4DSTEM/SimulatoKit">SimulatoKit</a></td><td>Multislice TEM/STEM simulation: potentials, frozen phonons, scans, detectors, CTF.</td><td>abTEM</td><td>0.3.0</td><td>28 of 123</td><td><a class="u-link" href="https://mac4dstem.github.io/SimulatoKit/documentation/">API</a></td></tr>
+</tbody></table></div>
+<p>"Parity: present of rows" counts the functions of the reference package that the kit has and has tested against it; each kit's <code>docs/parity.md</code> lists every function with its state and tolerance. See <a class="u-link" href="/suite/benchmarks.html">benchmarks</a> and <a class="u-link" href="/suite/releases.html">releases</a>.</p>
+<p>Apps: <a class="u-link" href="/">mac4DSTEM</a> (4D-STEM) and macTEM (TEM images and diffraction).</p>
+    </article>
+  </div>
+</main>
+</body>
+</html>
