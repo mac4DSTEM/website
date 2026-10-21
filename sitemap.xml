@@ -20,4 +20,19 @@
     <lastmod>2026-08-14</lastmod>
     <priority>0.3</priority>
   </url>
+  <url>
+    <loc>https://mac4dstem.com/suite/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://mac4dstem.com/suite/benchmarks.html</loc>
+    <lastmod>2026-10-21</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://mac4dstem.com/suite/releases.html</loc>
+    <lastmod>2026-10-21</lastmod>
+    <priority>0.5</priority>
+  </url>
 </urlset>
