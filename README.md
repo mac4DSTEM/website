@@ -28,6 +28,7 @@ opening `index.html` directly from the filesystem will not load the stylesheet.
 | `impressum.html` | Provider identification (§ 5 DDG). |
 | `assets/site.css` | Styling shared across all pages. |
 | `assets/demo.js` | The interactive virtual-imaging demo. |
+| `guide/` | Short feature guides, one page per app. Hand-written. |
 | `suite/` | Kits overview, benchmarks and releases pages for the macEM suite. Generated, do not edit. |
 | `tools/build_suite_pages.py` | Generates `suite/` from the kits' CHANGELOG, `docs/parity.md` and `docs/benchmarks.md`. Run after a kit tag. |
 | `tools/export_atlas.py` | Regenerates the demo dataset. Development only. |

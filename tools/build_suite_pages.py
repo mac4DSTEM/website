@@ -100,6 +100,7 @@ th,td{{padding:.3rem .7rem;border-bottom:1px solid color-mix(in srgb,currentColo
     <a class="masthead-mark" href="/"><img src="/assets/icon-512.png" alt="" width="512" height="512"><span>mac<em>4D</em>STEM</span></a>
     <nav aria-label="Sections">
       <a href="/">Home</a>
+      <a href="/guide/">Guide</a>
       <a href="/suite/">Kits</a>
       <a href="/suite/benchmarks.html">Benchmarks</a>
       <a href="/suite/releases.html">Releases</a>

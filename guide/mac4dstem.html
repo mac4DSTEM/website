@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mac4DSTEM — macEM guide</title>
+<meta name="description" content="What mac4DSTEM does, its rooms, and simple workflows.">
+<link rel="canonical" href="https://mac4dstem.com/guide/mac4dstem.html">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/icon-512.png" type="image/png" sizes="512x512">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+.tablewrap{overflow-x:auto;margin:1rem 0}
+table{border-collapse:collapse;font-size:.9rem}
+th,td{padding:.3rem .7rem;border-bottom:1px solid color-mix(in srgb,currentColor 18%,transparent);text-align:left;vertical-align:top}
+.doc ol{margin:0 0 1rem;padding-left:1.3rem;max-width:62ch}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="masthead">
+  <div class="wrap">
+    <a class="masthead-mark" href="/"><img src="/assets/icon-512.png" alt="" width="512" height="512"><span>mac<em>4D</em>STEM</span></a>
+    <nav aria-label="Sections">
+      <a href="/">Home</a>
+      <a href="/guide/">Guide</a>
+      <a href="/suite/">Kits</a>
+      <a href="/suite/benchmarks.html">Benchmarks</a>
+      <a href="/suite/releases.html">Releases</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+  <div class="wrap">
+    <article class="doc">
+<h1>mac4DSTEM</h1>
+<p class="lede">mac4DSTEM is a native Mac app for 4D-STEM data: a diffraction pattern at every scan position. You change detectors and settings and see the result update right away.</p>
+<p>It needs macOS 27 or later on Apple Silicon. Download and release notes are on <a href="https://github.com/mac4DSTEM/mac4DSTEM/releases">GitHub</a>.</p>
+<h2>Rooms</h2>
+<p>Rooms follow the data. Switch with ⌘1 to ⌘7.</p>
+<div class="tablewrap"><table><thead><tr><th>Room</th><th>What it is for</th></tr></thead><tbody><tr><td><strong>Prepare</strong></td><td>Open a file, check the calibration, crop, stride or clean hot pixels before you work.</td></tr><tr><td><strong>Imaging</strong></td><td>Real and diffraction space side by side. Place bright-field, dark-field and annular detectors and watch the image change.</td></tr><tr><td><strong>Bragg Disks</strong></td><td>Find the diffraction spots in every pattern and check them on screen.</td></tr><tr><td><strong>Crystal Maps</strong></td><td>Strain and crystal orientation maps from the found spots.</td></tr><tr><td><strong>Reconstruction</strong></td><td>Phase and field images (DPC, iDPC, parallax, ptychography).</td></tr><tr><td><strong>Results</strong></td><td>Collect and export what you made.</td></tr><tr><td><strong>Spectroscopy</strong></td><td>EDX spectrum images: element ID, maps, quantification.</td></tr></tbody></table></div>
+<h2>Workflows</h2>
+<h3>Make a virtual image</h3>
+<ol><li>Open your file (<strong>⌘O</strong>); check the scale in Prepare.</li><li>Go to <strong>Imaging</strong>.</li><li>Pick a detector type (bright field, annular dark field, point) and drag it over the pattern.</li><li>Read the real-space image beside it; it updates as you move the detector.</li><li>Export from <strong>Results</strong>.</li></ol>
+<h3>Map strain</h3>
+<ol><li>Open the file and go to <strong>Bragg Disks</strong>.</li><li>Run disk detection; adjust the threshold until the markers sit on the spots.</li><li>Go to <strong>Crystal Maps</strong> and choose strain.</li><li>Read the strain maps; the quality and indexed-fraction numbers show where to trust them.</li><li>Export the maps from Results.</li></ol>
+<h3>Map crystal orientation</h3>
+<ol><li>Find the Bragg disks first.</li><li>In <strong>Crystal Maps</strong> choose orientation and load a structure (a CIF file or a Materials Project id).</li><li>Run the match.</li><li>Read the orientation map and its reliability map; low reliability marks places to doubt.</li></ol>
+<h3>Map phase and fields</h3>
+<ol><li>Open the file and set the detector geometry in Imaging.</li><li>Go to <strong>Reconstruction</strong> and choose DPC, iDPC or ptychography.</li><li>Run it and read the image. Phase and precipitate mapping are marked unvalidated in the app.</li></ol>
+<h3>Look at EDX</h3>
+<ol><li>Open an EDX spectrum image.</li><li>Go to <strong>Spectroscopy</strong>; run Auto ID to find the elements.</li><li>Draw a region to see its spectrum.</li><li>Quantify and read the composition.</li></ol>
+<p>Results are marked on screen when they are not yet validated. Full details: <a href="https://github.com/mac4DSTEM/mac4DSTEM">README and status on GitHub</a>.</p>
+    </article>
+  </div>
+</main>
+</body>
+</html>
