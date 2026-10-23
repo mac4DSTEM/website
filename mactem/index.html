@@ -22,315 +22,6 @@
 
 <link rel="stylesheet" href="/assets/site.css">
 
-<style>
-  /* ---- hero ---- */
-
-  .hero { padding-block: clamp(1.75rem, 4vw, 2.75rem) clamp(1.5rem, 3vw, 2.25rem); }
-
-  .hero-head {
-    display: flex;
-    align-items: center;
-    gap: clamp(0.7rem, 2vw, 1.1rem);
-    margin: 0 0 0.9rem;
-  }
-
-  .hero-logo {
-    width: clamp(2.6rem, 7vw, 3.4rem);
-    height: clamp(2.6rem, 7vw, 3.4rem);
-    border-radius: 0.7rem;
-    display: block;
-    flex: none;
-  }
-
-  .wordmark {
-    font-family: var(--mono);
-    font-size: clamp(2rem, 6.5vw, 3.1rem);
-    font-weight: 600;
-    letter-spacing: -0.045em;
-    line-height: 1;
-    margin: 0;
-  }
-
-  .wordmark em { font-style: normal; color: var(--amber); }
-
-  .tagline {
-    font-size: clamp(1.1rem, 2.4vw, 1.35rem);
-    line-height: 1.35;
-    margin: 0 0 1.5rem;
-    max-width: 24ch;
-    letter-spacing: -0.01em;
-  }
-
-  .lede {
-    color: var(--muted);
-    max-width: 56ch;
-    margin: 0 0 1.4rem;
-    font-size: 1rem;
-  }
-
-  .specs {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.45rem;
-    margin: 0;
-    padding: 0;
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-  }
-
-  .specs li {
-    border: 1px solid var(--hair);
-    padding: 0.32rem 0.6rem;
-  }
-
-  /* ---- hero download ---- */
-
-  .get {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 0.75rem 1.15rem;
-    margin: 2rem 0 1.75rem;
-  }
-
-  /* Filled rather than outlined, so it carries weight the nav pill does not —
-     but in the site's own mono/uppercase idiom, so it reads as part of the
-     design rather than a marketing button dropped on top of it. */
-  .get-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    text-decoration: none;
-    color: var(--ash);
-    background: var(--amber);
-    border: 1px solid var(--amber);
-    border-radius: 999px;
-    padding: 0.8rem 1.5rem;
-    transition: background-color 0.15s ease, color 0.15s ease;
-  }
-
-  .get-btn:hover {
-    background: transparent;
-    color: var(--amber);
-  }
-
-  .get-btn span[aria-hidden] { font-size: 0.95em; }
-
-  .get-meta {
-    font-family: var(--mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-    margin: 0;
-  }
-
-
-  /* ---- sections ---- */
-
-  .band { padding-block: clamp(2.75rem, 7vw, 4.5rem); }
-
-  .band-rule { border-top: 1px solid var(--hair); }
-
-  /* ---- screenshot ---- */
-
-  .shot { margin: 0; }
-
-  .shot img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .shot figcaption {
-    font-family: var(--mono);
-    font-size: 0.68rem;
-    line-height: 1.6;
-    color: var(--muted);
-    max-width: 58ch;
-    margin-top: 1.4rem;
-  }
-
-  .shot figcaption a {
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid var(--amber);
-    white-space: nowrap;
-  }
-
-  .band-note {
-    margin: 2rem 0 0;
-    color: var(--muted);
-    font-size: 0.88rem;
-    max-width: 60ch;
-  }
-
-  /* ---- capabilities ---- */
-
-  .caps {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 0;
-    grid-template-columns: 1fr;
-  }
-
-  @media (min-width: 46rem) {
-    .caps { grid-template-columns: 1fr 1fr; column-gap: clamp(2rem, 5vw, 4rem); }
-  }
-
-  .caps li {
-    border-top: 1px solid var(--hair);
-    padding: 1rem 0;
-  }
-
-  .caps h3 {
-    font-family: var(--mono);
-    font-size: 0.82rem;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    margin: 0 0 0.35rem;
-  }
-
-  .caps p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 0.9rem;
-    line-height: 1.55;
-    max-width: 44ch;
-  }
-
-  /* ---- provenance ---- */
-
-  .prov {
-    display: grid;
-    gap: clamp(1.75rem, 4vw, 3rem);
-    grid-template-columns: 1fr;
-  }
-
-  @media (min-width: 52rem) {
-    .prov { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
-  }
-
-  .prov p {
-    color: var(--muted);
-    margin: 0 0 1rem;
-    max-width: 52ch;
-  }
-
-  .prov p:last-child { margin-bottom: 0; }
-
-  .prov strong { color: var(--ink); font-weight: 600; }
-
-  .facts {
-    margin: 0;
-    font-family: var(--mono);
-    font-size: 0.75rem;
-  }
-
-  .facts div {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
-    border-top: 1px solid var(--hair);
-    padding: 0.7rem 0;
-  }
-
-  .facts dt {
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 0.66rem;
-  }
-
-  .facts dd { margin: 0; text-align: right; }
-
-  /* ---- availability ---- */
-
-  .steps {
-    list-style: none;
-    counter-reset: step;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 0;
-    grid-template-columns: 1fr;
-  }
-
-  @media (min-width: 46rem) {
-    .steps { grid-template-columns: repeat(3, 1fr); column-gap: clamp(1.5rem, 4vw, 3rem); }
-  }
-
-  .steps li {
-    counter-increment: step;
-    border-top: 1px solid var(--hair);
-    padding: 1rem 0 0;
-  }
-
-  .steps h3 {
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    font-weight: 600;
-    margin: 0 0 0.4rem;
-    display: flex;
-    align-items: baseline;
-    gap: 0.55rem;
-  }
-
-  .steps h3::before {
-    content: counter(step, decimal-leading-zero);
-    color: var(--muted);
-    font-size: 0.66rem;
-    letter-spacing: 0.1em;
-  }
-
-  .steps li[data-state="done"] h3::before { color: var(--amber); }
-
-  .steps p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 0.88rem;
-    line-height: 1.55;
-  }
-
-  /* ---- contact ---- */
-
-  .contact {
-    display: grid;
-    gap: 1.25rem;
-    max-width: 52ch;
-  }
-
-  .contact h2 {
-    font-size: clamp(1.3rem, 3vw, 1.7rem);
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-    margin: 0;
-  }
-
-  .contact p { margin: 0; color: var(--muted); }
-
-  .contact .mail {
-    font-family: var(--mono);
-    font-size: clamp(1rem, 2.4vw, 1.2rem);
-    text-decoration: none;
-    border-bottom: 1px solid var(--amber);
-    padding-bottom: 0.15rem;
-    justify-self: start;
-    transition: color 0.15s ease;
-  }
-
-  .contact .mail:hover { color: var(--amber); }
-</style>
 </head>
 
 <body>
@@ -342,23 +33,18 @@
     <nav aria-label="Sections">
       <a href="#rooms">Rooms</a>
       <a href="#validation">Validation</a>
-      <a href="#availability">Availability</a>
-      <a href="#contact">Contact</a>
       <a href="/">mac4DSTEM</a>
-      <a href="/suite/">Kits</a>
       <!-- DOWNLOAD: replace href with the macTEM 1.0.0 release DMG once the release is public. -->
-      <a class="nav-download" href="#availability">Download</a>
+      <a class="nav-download" href="#download">Download</a>
     </nav>
   </div>
 </header>
 
 <main id="main">
 
-  <!-- ---------- hero ---------- -->
-
   <div class="wrap">
     <section class="hero">
-      <p class="eyebrow">Version 1.0.0</p>
+      <p class="eyebrow">Version 1.0.0 · part of the macEM suite, beside <a class="u-link" href="/">mac4DSTEM</a></p>
 
       <div class="hero-head">
         <h1 class="wordmark">mac<em>TEM</em></h1>
@@ -367,22 +53,17 @@
       <p class="tagline">TEM images, spectra and diffraction, native on Apple silicon.</p>
 
       <p class="lede">
-        A macOS application for transmission electron microscopy: calibrated images and their
-        Fourier transforms, EDS and EELS spectrum images taken to composition and thickness, and
-        electron diffraction patterns calibrated and indexed. The second app of the macEM suite,
-        beside <a class="u-link" href="/">mac4DSTEM</a>.
+        Open a micrograph or a spectrum image, look, measure, and export a figure, with every
+        number traceable to the method and reference it came from.
       </p>
 
-      <div class="get">
+      <div class="get" id="download">
         <!-- DOWNLOAD: replace href with the macTEM 1.0.0 release DMG once the release is public. -->
-        <a class="get-btn" href="#availability">
-          <span aria-hidden="true">↓</span> Download for macOS
-        </a>
-        <p class="get-meta">Version 1.0.0 · signed and notarized</p>
+        <a class="get-btn" href="#download">Download for macOS</a>
+        <p class="get-meta">Version 1.0.0 · signed and notarized · macOS 27+ on Apple silicon</p>
       </div>
 
       <ul class="specs">
-        <li>macOS 27+</li>
         <li>Apple silicon</li>
         <li>Metal</li>
         <li>GPL-3.0</li>
@@ -391,140 +72,77 @@
     </section>
   </div>
 
-  <!-- ---------- screenshot slot ----------
-       A workspace screenshot from the 1.0.0 build goes here, in the home page's
-       .shot figure (assets/mactem-workspace.png / .webp, 1600 wide). -->
-
-  <!-- ---------- rooms ---------- -->
+  <!-- Screenshot slot: a 1.0.0 workspace screenshot goes here in a .shot figure
+       (assets/mactem-workspace.png, 1600 wide), as on the mac4DSTEM page. -->
 
   <div class="wrap">
-    <section class="band band-rule" id="rooms" aria-labelledby="rooms-h">
+    <section class="band" id="rooms" aria-labelledby="rooms-h">
       <h2 class="section-label" id="rooms-h">Rooms</h2>
 
       <ul class="caps">
         <li>
           <h3>Image</h3>
-          <p>DigitalMicrograph DM3/DM4, TIFF (including multi-frame stacks), MRC and Velox EMD open at their calibration, several to a window. Contrast, colormap and gamma on a histogram of the raw counts; distance, angle and line-profile measurements; the acquisition metadata; particle counts and sizes.</p>
+          <p>DM3/DM4, TIFF stacks, MRC and Velox EMD at their calibration. Contrast, distances, angles, profiles, particles.</p>
         </li>
         <li>
           <h3>FFT</h3>
-          <p>The live transform of a region with a window before it, the radial profile, spot d-spacings and Find Spots for the strongest reflections, a masked inverse, and HRTEM filters.</p>
+          <p>The live transform, radial profile, spot d-spacings, a masked inverse and HRTEM filters.</p>
         </li>
         <li>
           <h3>EDS</h3>
-          <p>Velox and GMS spectrum images with their HAADF. Auto ID proposes the elements by the published AutoEMX/NIST identification method; Cliff-Lorimer, zeta-factor and cross-section quantification with absorption correction; net-count, wt%, at% and thickness maps; regions drawn on the map and compared side by side.</p>
+          <p>Velox and GMS spectrum images. Auto ID, Cliff-Lorimer and zeta quantification, wt% and at% maps, regions.</p>
         </li>
         <li>
           <h3>EELS</h3>
-          <p>GMS spectrum images with their low loss and core loss. Zero-loss alignment, t/λ maps by the log-ratio method, and edge quantification with a power-law background, each intensity with its uncertainty: 383 K, L and M edges across 95 elements from the dft GOS set.</p>
+          <p>GMS spectrum images. t/λ maps and edge quantification with uncertainties, 383 edges across 95 elements.</p>
         </li>
         <li>
           <h3>Diffraction</h3>
-          <p>Any image read as a pattern: the centre, a calibration from a ring of Au, Al or Si or from the file's own axis, fitted rings and refined spots, indexed against a standard or an imported CIF.</p>
+          <p>Calibrate from a ring or the file, fit rings, index spots against a standard or a CIF.</p>
         </li>
         <li>
-          <h3>Results and export</h3>
-          <p>Every measurement in one ledger. Tables as CSV, spectra as EMSA/MSA, maps as PNG with their scale bar, and the method as JSON; marks are kept in a session file beside the image.</p>
+          <h3>Results</h3>
+          <p>Every measurement in one place; CSV, MSA, PNG with scale bar, and the method as JSON.</p>
         </li>
       </ul>
     </section>
   </div>
 
-  <!-- ---------- validation ---------- -->
-
   <div class="wrap">
-    <section class="band band-rule" id="validation" aria-labelledby="validation-h">
+    <section class="band" id="validation" aria-labelledby="validation-h">
       <h2 class="section-label" id="validation-h">Provenance and validation</h2>
 
       <div class="prov">
         <div>
           <p>
-            The numerics live in open Swift packages, each ported from and tested against the
-            Python package the field already uses: file readers against RosettaSciIO, image
-            numerics against NumPy, SciPy and scikit-image, crystallography against pymatgen, and
-            spectroscopy against HyperSpy and exSpy. See the <a class="u-link" href="/suite/">kits</a>.
+            The numerics live in the open <a class="u-link" href="/suite/">macEM kits</a>, each
+            tested against the Python package the field already uses: RosettaSciIO for files,
+            NumPy, SciPy and scikit-image for images, pymatgen for crystallography, HyperSpy and
+            exSpy for spectroscopy. <strong>A result not yet validated against a standard is
+            labelled so.</strong>
           </p>
           <p>
-            EELS cross sections are the generalised oscillator strengths of L. Segger, G. Guzzinati
-            and H. Kohl, <a class="u-link" href="https://doi.org/10.5281/zenodo.7645765">dft GOS v1.5.0</a>
-            (CC BY 4.0), the tables exSpy uses, bundled unchanged.
-          </p>
-          <p>
-            Readers, indices and metadata are tested exact; numbers agree with the reference within
-            that package's own tolerance. <strong>Where a result has not yet been validated against
-            a standard, it is labelled so</strong> rather than presented as though it were.
+            EELS cross sections are the generalised oscillator strengths of Segger, Guzzinati and
+            Kohl, <a class="u-link" href="https://doi.org/10.5281/zenodo.7645765">dft GOS v1.5.0</a>,
+            CC BY 4.0, bundled unchanged.
           </p>
         </div>
 
         <dl class="facts">
-          <div>
-            <dt>Readers</dt>
-            <dd>DM3/DM4 · TIFF · MRC · EMD · MSA</dd>
-          </div>
-          <div>
-            <dt>Spectroscopy</dt>
-            <dd>HyperSpy, exSpy</dd>
-          </div>
-          <div>
-            <dt>EELS edges</dt>
-            <dd>383 edges, 95 elements</dd>
-          </div>
-          <div>
-            <dt>Built on</dt>
-            <dd>Four macEM kits</dd>
-          </div>
-          <div>
-            <dt>Runtime</dt>
-            <dd>Self-contained</dd>
-          </div>
-          <div>
-            <dt>Licence</dt>
-            <dd>GPL-3.0</dd>
-          </div>
+          <div><dt>Requires</dt><dd>macOS 27, Apple silicon</dd></div>
+          <div><dt>Built on</dt><dd>FormatoKit, ImagoKit, DiffractoKit, SpectroKit</dd></div>
+          <div><dt>Runtime</dt><dd>Self-contained</dd></div>
+          <div><dt>Licence</dt><dd>GPL-3.0</dd></div>
         </dl>
       </div>
     </section>
   </div>
 
-  <!-- ---------- availability ---------- -->
-
   <div class="wrap">
-    <section class="band band-rule" id="availability" aria-labelledby="availability-h">
-      <h2 class="section-label" id="availability-h">Availability</h2>
-
-      <ol class="steps">
-        <li data-state="done">
-          <h3>Version 1.0.0</h3>
-          <p>Image, FFT, EDS, EELS, Diffraction and Results rooms, covered by automated unit tests and UI journeys that walk the real app.</p>
-        </li>
-        <li data-state="done">
-          <h3>Download</h3>
-          <!-- DOWNLOAD: replace href with the macTEM 1.0.0 release DMG once the release is public. -->
-          <p>Version 1.0.0 is <a href="#availability">available as a signed, notarized disk image</a>. Open it and drag macTEM to your Applications folder; it needs nothing else installed.</p>
-        </li>
-        <li data-state="done">
-          <h3>Open kits</h3>
-          <p>The kits macTEM is built on are published on <a href="https://github.com/mac4DSTEM">GitHub</a> under GPL-3.0, with their parity tables.</p>
-        </li>
-      </ol>
-
-      <p class="band-note">
-        Requires macOS 27 or later on Apple silicon. No external runtime, toolchain, or library
-        installation is needed; all dependencies are contained within the application.
-      </p>
-    </section>
-  </div>
-
-  <!-- ---------- contact ---------- -->
-
-  <div class="wrap">
-    <section class="band band-rule" id="contact" aria-labelledby="contact-h">
+    <section class="band" id="contact" aria-labelledby="contact-h">
       <div class="contact">
-        <h2 id="contact-h">Enquiries, issue reports, and collaboration</h2>
-        <p>
-          If you work with TEM data and something here is useful, or missing, I would like
-          to hear about it.
-        </p>
+        <h2 id="contact-h">Questions, issues, collaboration</h2>
+        <p>If you work with TEM data and something here is useful, or missing, I would like to hear about it.</p>
         <a class="mail" href="mailto:mail@mac4dstem.com">mail@mac4dstem.com</a>
       </div>
     </section>
