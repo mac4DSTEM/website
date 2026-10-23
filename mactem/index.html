@@ -14,7 +14,8 @@
 <meta property="og:url" content="https://mac4dstem.com/mactem/">
 <meta property="og:title" content="macTEM — native TEM image and spectrum analysis for Apple silicon">
 <meta property="og:description" content="A native macOS application for TEM: calibrated images and FFTs, EDS and EELS spectrum images with quantification, and electron diffraction, natively on Apple silicon.">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://mac4dstem.com/assets/mactem-workspace.jpg">
+<meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" href="/assets/favicon.ico" sizes="any">
 <link rel="icon" href="/assets/icon-512.png" type="image/png" sizes="512x512">
@@ -34,8 +35,8 @@
       <a href="#rooms">Rooms</a>
       <a href="#validation">Validation</a>
       <a href="/">mac4DSTEM</a>
-      <!-- DOWNLOAD: replace href with the macTEM 1.0.0 release DMG once the release is public. -->
-      <a class="nav-download" href="#download">Download</a>
+      <a class="nav-source" href="https://github.com/mac4DSTEM/macTEM"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>GitHub</a>
+      <a class="nav-download" href="https://github.com/mac4DSTEM/macTEM/releases/latest">Download</a>
     </nav>
   </div>
 </header>
@@ -58,8 +59,7 @@
       </p>
 
       <div class="get" id="download">
-        <!-- DOWNLOAD: replace href with the macTEM 1.0.0 release DMG once the release is public. -->
-        <a class="get-btn" href="#download">Download for macOS</a>
+        <a class="get-btn" href="https://github.com/mac4DSTEM/macTEM/releases/latest">Download for macOS</a>
         <p class="get-meta">Version 1.0.0 · signed and notarized · macOS 27+ on Apple silicon</p>
       </div>
 
@@ -72,8 +72,29 @@
     </section>
   </div>
 
-  <!-- Screenshot slot: a 1.0.0 workspace screenshot goes here in a .shot figure
-       (assets/mactem-workspace.png, 1600 wide), as on the mac4DSTEM page. -->
+  <div class="wrap">
+    <section class="band" id="workspace" aria-labelledby="workspace-h">
+      <h2 class="section-label" id="workspace-h">The workspace</h2>
+
+      <figure class="shot">
+        <picture>
+          <source
+            type="image/webp"
+            srcset="/assets/mactem-workspace.webp 1200w, /assets/mactem-workspace@2x.webp 2400w"
+            sizes="(min-width: 66rem) 60rem, 100vw">
+          <img
+            src="/assets/mactem-workspace.jpg"
+            width="1600" height="882"
+            alt="The macTEM Image room: a STEM image at its calibration with a distance measurement, the rooms in the sidebar, and calibration, display, measurement and particle settings in the inspector."
+            loading="lazy" decoding="async">
+        </picture>
+        <figcaption>
+          The Image room on a GMS .dm4 file: the calibration read from the file,
+          a measured distance, and the room's settings in the inspector.
+        </figcaption>
+      </figure>
+    </section>
+  </div>
 
   <div class="wrap">
     <section class="band" id="rooms" aria-labelledby="rooms-h">
@@ -133,6 +154,7 @@
           <div><dt>Built on</dt><dd>FormatoKit, ImagoKit, DiffractoKit, SpectroKit</dd></div>
           <div><dt>Runtime</dt><dd>Self-contained</dd></div>
           <div><dt>Licence</dt><dd>GPL-3.0</dd></div>
+          <div><dt>Source</dt><dd><a class="u-link" href="https://github.com/mac4DSTEM/macTEM">GitHub</a></dd></div>
         </dl>
       </div>
     </section>
@@ -176,7 +198,8 @@
     "@type": "Offer",
     "price": "0",
     "priceCurrency": "EUR"
-  }
+  },
+  "screenshot": "https://mac4dstem.com/assets/mactem-workspace.jpg"
 }
 </script>
 </body>
