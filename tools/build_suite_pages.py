@@ -158,7 +158,7 @@ def main():
 <div class="tablewrap"><table><thead><tr><th>Kit</th><th>What it does</th><th>Reference</th><th>Version</th><th>Parity: present of rows</th><th>Docs</th></tr></thead><tbody>
 {rows}</tbody></table></div>
 <p>"Parity: present of rows" counts the functions of the reference package that the kit has and has tested against it; each kit's <code>docs/parity.md</code> lists every function with its state and tolerance. See <a class="u-link" href="/suite/benchmarks.html">benchmarks</a> and <a class="u-link" href="/suite/releases.html">releases</a>.</p>
-<p>Apps: <a class="u-link" href="/">mac4DSTEM</a> (4D-STEM) and macTEM (TEM images and diffraction).</p>"""
+<p>Apps: <a class="u-link" href="/">mac4DSTEM</a> (4D-STEM) and <a class="u-link" href="/mactem/">macTEM</a> (TEM images, spectroscopy and diffraction).</p>"""
     (out / "index.html").write_text(page("Kits", "The six Swift kits of the macEM suite: what each does, its Python reference, version and parity.", body, ""))
 
     body = ["<h1>Benchmarks</h1>",
