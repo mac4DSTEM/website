@@ -23,6 +23,7 @@ opening `index.html` directly from the filesystem will not load the stylesheet.
 | Path | Purpose |
 |---|---|
 | `index.html` | Landing page. Page-specific styling lives in its `<style>` block. |
+| `mactem/index.html` | The macTEM page, in the landing page's style (its own `<style>` block, the demo left out). |
 | `privacy.html` | Privacy policy. |
 | `support.html` | Support, requirements, and known limitations. |
 | `impressum.html` | Provider identification (§ 5 DDG). |

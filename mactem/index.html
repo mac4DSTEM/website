@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>macTEM — native TEM image and spectrum analysis for Apple silicon</title>
+<meta name="description" content="macTEM is a native macOS application for TEM: calibrated images and FFTs, EDS and EELS spectrum images with quantification, and electron diffraction, running natively on Apple silicon.">
+<link rel="canonical" href="https://mac4dstem.com/mactem/">
+<meta name="color-scheme" content="light dark">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="macEM">
+<meta property="og:url" content="https://mac4dstem.com/mactem/">
+<meta property="og:title" content="macTEM — native TEM image and spectrum analysis for Apple silicon">
+<meta property="og:description" content="A native macOS application for TEM: calibrated images and FFTs, EDS and EELS spectrum images with quantification, and electron diffraction, natively on Apple silicon.">
+<meta property="og:image" content="https://mac4dstem.com/assets/mactem-workspace.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="/assets/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/icon-512.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+
+<link rel="stylesheet" href="/assets/site.css">
+
+</head>
+
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="wrap">
+    <a class="masthead-mark" href="/mactem/"><span>mac<em>TEM</em></span></a>
+    <nav aria-label="Sections">
+      <a href="#rooms">Rooms</a>
+      <a href="#validation">Validation</a>
+      <a href="/">mac4DSTEM</a>
+      <a class="nav-source" href="https://github.com/mac4DSTEM/macTEM"><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>GitHub</a>
+      <a class="nav-download" href="https://github.com/mac4DSTEM/macTEM/releases/latest">Download</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <div class="wrap">
+    <section class="hero">
+      <p class="eyebrow">Version 1.0.0 · part of the macEM suite, beside <a class="u-link" href="/">mac4DSTEM</a></p>
+
+      <div class="hero-head">
+        <h1 class="wordmark">mac<em>TEM</em></h1>
+      </div>
+
+      <p class="tagline">TEM images, spectra and diffraction, native on Apple silicon.</p>
+
+      <p class="lede">
+        Open a micrograph or a spectrum image, look, measure, and export a figure, with every
+        number traceable to the method and reference it came from.
+      </p>
+
+      <div class="get" id="download">
+        <a class="get-btn" href="https://github.com/mac4DSTEM/macTEM/releases/latest">Download for macOS</a>
+        <p class="get-meta">Version 1.0.0 · signed and notarized · macOS 27+ on Apple silicon</p>
+      </div>
+
+      <ul class="specs">
+        <li>Apple silicon</li>
+        <li>Metal</li>
+        <li>GPL-3.0</li>
+        <li>Free</li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <section class="band" id="workspace" aria-labelledby="workspace-h">
+      <h2 class="section-label" id="workspace-h">The workspace</h2>
+
+      <figure class="shot">
+        <picture>
+          <source
+            type="image/webp"
+            srcset="/assets/mactem-workspace.webp 1200w, /assets/mactem-workspace@2x.webp 2400w"
+            sizes="(min-width: 66rem) 60rem, 100vw">
+          <img
+            src="/assets/mactem-workspace.jpg"
+            width="1600" height="882"
+            alt="The macTEM Image room: a STEM image at its calibration with a distance measurement, the rooms in the sidebar, and calibration, display, measurement and particle settings in the inspector."
+            loading="lazy" decoding="async">
+        </picture>
+        <figcaption>
+          The Image room on a GMS .dm4 file: the calibration read from the file,
+          a measured distance, and the room's settings in the inspector.
+        </figcaption>
+      </figure>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <section class="band" id="rooms" aria-labelledby="rooms-h">
+      <h2 class="section-label" id="rooms-h">Rooms</h2>
+
+      <ul class="caps">
+        <li>
+          <h3>Image</h3>
+          <p>DM3/DM4, TIFF stacks, MRC and Velox EMD at their calibration. Contrast, distances, angles, profiles, particles.</p>
+        </li>
+        <li>
+          <h3>FFT</h3>
+          <p>The live transform, radial profile, spot d-spacings, a masked inverse and HRTEM filters.</p>
+        </li>
+        <li>
+          <h3>EDS</h3>
+          <p>Velox and GMS spectrum images. Auto ID, Cliff-Lorimer and zeta quantification, wt% and at% maps, regions.</p>
+        </li>
+        <li>
+          <h3>EELS</h3>
+          <p>GMS spectrum images. t/λ maps and edge quantification with uncertainties, 383 edges across 95 elements.</p>
+        </li>
+        <li>
+          <h3>Diffraction</h3>
+          <p>Calibrate from a ring or the file, fit rings, index spots against a standard or a CIF.</p>
+        </li>
+        <li>
+          <h3>Results</h3>
+          <p>Every measurement in one place; CSV, MSA, PNG with scale bar, and the method as JSON.</p>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <section class="band" id="validation" aria-labelledby="validation-h">
+      <h2 class="section-label" id="validation-h">Provenance and validation</h2>
+
+      <div class="prov">
+        <div>
+          <p>
+            The numerics live in the open <a class="u-link" href="/suite/">macEM kits</a>, each
+            tested against the Python package the field already uses: RosettaSciIO for files,
+            NumPy, SciPy and scikit-image for images, pymatgen for crystallography, HyperSpy and
+            exSpy for spectroscopy. <strong>A result not yet validated against a standard is
+            labelled so.</strong>
+          </p>
+          <p>
+            EELS cross sections are the generalised oscillator strengths of Segger, Guzzinati and
+            Kohl, <a class="u-link" href="https://doi.org/10.5281/zenodo.7645765">dft GOS v1.5.0</a>,
+            CC BY 4.0, bundled unchanged.
+          </p>
+        </div>
+
+        <dl class="facts">
+          <div><dt>Requires</dt><dd>macOS 27, Apple silicon</dd></div>
+          <div><dt>Built on</dt><dd>FormatoKit, ImagoKit, DiffractoKit, SpectroKit</dd></div>
+          <div><dt>Runtime</dt><dd>Self-contained</dd></div>
+          <div><dt>Licence</dt><dd>GPL-3.0</dd></div>
+          <div><dt>Source</dt><dd><a class="u-link" href="https://github.com/mac4DSTEM/macTEM">GitHub</a></dd></div>
+        </dl>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap">
+    <section class="band" id="contact" aria-labelledby="contact-h">
+      <div class="contact">
+        <h2 id="contact-h">Questions, issues, collaboration</h2>
+        <p>If you work with TEM data and something here is useful, or missing, I would like to hear about it.</p>
+        <a class="mail" href="mailto:mail@mac4dstem.com">mail@mac4dstem.com</a>
+      </div>
+    </section>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Siegen, Germany</span>
+    <nav aria-label="Legal and support">
+      <a href="/support.html">Support</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/impressum.html">Impressum</a>
+    </nav>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "macTEM",
+  "url": "https://mac4dstem.com/mactem/",
+  "applicationCategory": "ScientificApplication",
+  "operatingSystem": "macOS 27 or later, Apple silicon",
+  "softwareVersion": "1.0.0",
+  "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "description": "A native macOS application for TEM: calibrated images and FFTs, EDS and EELS spectrum images with quantification, and electron diffraction, computed natively on Apple silicon.",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "EUR"
+  },
+  "screenshot": "https://mac4dstem.com/assets/mactem-workspace.jpg"
+}
+</script>
+</body>
+</html>
