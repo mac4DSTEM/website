@@ -36,6 +36,8 @@
 
 * { box-sizing: border-box; }
 
+[hidden] { display: none !important; }
+
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
@@ -600,4 +602,129 @@ summary:focus-visible {
   padding: 1rem 1.15rem;
   margin: 0 0 1.5rem;
   color: var(--ink);
+}
+
+/* ---- the app layer: anything that shows the apps is drawn as the apps draw it ----
+   Always dark, in both page themes, with the apps' measured colours (macEM design system, app-* tokens). */
+
+.app {
+  --app-window: #282829;
+  --app-hair: #47474a;
+  --app-control: #545557;
+  --app-label: #ffffff;
+  --app-secondary: #98989d;
+  --app-accent: #0a84ff;
+  --status-done: #30d158;
+  --chip-ground: rgba(0, 0, 0, 0.45);
+  background: var(--app-window);
+  color: var(--app-label);
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px var(--app-hair), var(--shadow-window, 0 12px 40px rgba(0, 0, 0, 0.14));
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1.25;
+}
+
+/* A pane: a header row of words, the data on black, chips on the data. */
+.app-pane { margin: 0; min-width: 0; display: flex; flex-direction: column; }
+
+.app-pane-hd {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.app-pane-hd b { font-weight: 600; }
+.app-pane-hd span { color: var(--app-secondary); }
+
+.app-pane-hd code {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--app-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app-canvas { position: relative; background: #000; }
+
+.app-chip {
+  position: absolute;
+  background: var(--chip-ground);
+  border-radius: 4px;
+  padding: 5px 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  line-height: 13px;
+  color: #fff;
+  pointer-events: none;
+}
+
+/* The bar's length is the chip's width less its padding: set the chip's width as a share of the canvas. */
+.app-chip.scale { left: 8px; bottom: 8px; box-sizing: content-box; padding: 5px 0; }
+.app-chip.scale::after { content: ""; display: block; height: 2px; background: #fff; margin-top: 3px; }
+.app-chip.scale span { padding: 0 2px; }
+
+.app-pane-ft {
+  margin: 0;
+  padding: 0.45rem 0.75rem 0.6rem;
+  font-size: 11px;
+  color: var(--app-secondary);
+}
+
+/* A full-width segmented control, the selected segment in the accent. */
+.app-seg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 2px;
+  background: var(--app-control);
+  border-radius: 8px;
+}
+
+.app-seg button {
+  flex: 1 1 auto;
+  font: inherit;
+  font-size: 12px;
+  color: var(--app-label);
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+}
+
+.app-seg button:hover { background: rgba(255, 255, 255, 0.08); }
+.app-seg button[aria-pressed="true"] { background: var(--app-accent); color: #fff; }
+
+/* The status line under the panes. */
+.app-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  padding: 0.55rem 0.75rem;
+  border-top: 1px solid var(--app-hair);
+  font-size: 12px;
+  color: var(--app-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.app-status .ok { color: var(--app-label); }
+.app-status .ok::before { content: "✓ "; color: var(--status-done); }
+.app-status .end { margin-left: auto; }
+
+/* A room label: where in the app a capability lives. */
+.room-tag {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--muted);
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  padding: 0.05rem 0.5rem;
+  margin-left: 0.4rem;
+  vertical-align: 0.1em;
 }

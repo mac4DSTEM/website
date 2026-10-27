@@ -68,57 +68,24 @@
     color: var(--muted);
   }
 
+  /* The demo is drawn as an app room (the app layer in site.css): two panes, the diffraction
+     pane left as in the app, the tool pickers and the status line below. */
   .demo-stage {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1rem;
     margin-top: 1.25rem;
   }
 
   @media (min-width: 46rem) {
-    .demo-stage { grid-template-columns: 1fr 1fr; }
-    .demo-controls { grid-column: 1 / -1; }
-  }
-
-  .demo-controls {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0.75rem 1.5rem;
-  }
-
-  /* A tile, as the apps draw a map: title and readout above the picture. */
-  .demo-panel {
-    margin: 0;
-    background: var(--panel);
-    border: 1px solid var(--hair);
-    border-radius: var(--radius);
-    padding: 0.75rem;
-    display: grid;
-    gap: 0.6rem;
-  }
-
-  .demo-panel figcaption {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 0.4rem 1rem;
-    font-size: 0.82rem;
-    font-weight: 600;
-  }
-
-  .demo-read {
-    font-family: var(--mono);
-    font-size: 0.78rem;
-    font-weight: 400;
-    color: var(--muted);
+    .demo-stage { grid-template-columns: 1fr 1px 1fr; }
+    .demo-divider { background: var(--app-hair); }
+    .demo-controls, .demo-stage .app-status { grid-column: 1 / -1; }
   }
 
   .demo-panel canvas {
     display: block;
     width: 100%;
     aspect-ratio: 1 / 1;
-    border-radius: 4px;
     /* pan-y, not none: a vertical swipe still scrolls the page past the demo.
        Tapping places the mask, horizontal dragging moves it. */
     touch-action: pan-y;
@@ -126,39 +93,15 @@
     background: #000;
   }
 
-  .demo-hint {
-    margin: 0;
-    font-size: 0.78rem;
-    color: var(--muted);
-  }
-
-  /* A segmented control, as in the apps' inspector. */
-  .demo-presets {
-    display: inline-flex;
+  .demo-controls {
+    display: flex;
     flex-wrap: wrap;
-    gap: 2px;
-    padding: 2px;
-    background: color-mix(in srgb, var(--ink) 7%, transparent);
-    border-radius: 8px;
+    gap: 0.6rem 1rem;
+    padding: 0.75rem;
+    border-top: 1px solid var(--app-hair);
   }
 
-  .demo-presets button {
-    font: inherit;
-    font-size: 0.82rem;
-    color: var(--ink);
-    background: none;
-    border: 0;
-    border-radius: 6px;
-    padding: 0.3rem 0.8rem;
-    cursor: pointer;
-  }
-
-  .demo-presets button:hover { background: color-mix(in srgb, var(--ink) 6%, transparent); }
-
-  .demo-presets button[aria-pressed="true"] {
-    color: var(--on-accent);
-    background: var(--accent);
-  }
+  .demo-controls .app-seg { flex: 1 1 18rem; }
 
 </style>
 </head>
@@ -235,39 +178,44 @@
         <span id="demo-status" class="demo-status">Loading the dataset…</span>
       </p>
 
-      <div id="demo-stage" class="demo-stage" hidden>
-        <figure class="demo-panel">
-          <figcaption>
-            <span>Diffraction space — detector</span>
-            <span id="demo-diff-read" class="demo-read"></span>
+      <div id="demo-stage" class="demo-stage app" hidden>
+        <figure class="demo-panel app-pane">
+          <figcaption class="app-pane-hd">
+            <b>Diffraction</b><span>detector</span>
+            <code id="demo-diff-read"></code>
           </figcaption>
-          <canvas id="demo-diff" aria-label="Diffraction pattern summed over the selected scan region. Drag to move the detector; scroll to resize it."></canvas>
-          <p class="demo-hint">Drag to move · scroll for outer radius · shift-scroll for inner</p>
+          <div class="app-canvas">
+            <canvas id="demo-diff" aria-label="Diffraction pattern summed over the selected scan region. Drag to move the detector; scroll to resize it."></canvas>
+            <span class="app-chip scale" style="width: 19.93%"><span>1 Å⁻¹</span></span>
+          </div>
+          <p class="app-pane-ft">Drag to move · scroll for outer radius · shift-scroll for inner</p>
         </figure>
-
-        <figure class="demo-panel">
-          <figcaption>
-            <span>Real space — virtual image</span>
-            <span id="demo-real-read" class="demo-read"></span>
+        <div class="demo-divider" aria-hidden="true"></div>
+        <figure class="demo-panel app-pane">
+          <figcaption class="app-pane-hd">
+            <b>Real space</b><span>virtual image</span>
+            <code id="demo-real-read"></code>
           </figcaption>
-          <canvas id="demo-real" aria-label="Virtual image of the scan, formed by the detector mask. Drag to place a region; scroll to resize it."></canvas>
-          <p class="demo-hint">Drag to select a region · scroll to resize</p>
+          <div class="app-canvas">
+            <canvas id="demo-real" aria-label="Virtual image of the scan, formed by the detector mask. Drag to place a region; scroll to resize it."></canvas>
+            <span class="app-chip scale" style="width: 16.67%"><span>100 nm</span></span>
+          </div>
+          <p class="app-pane-ft">Drag to select a region · scroll to resize</p>
         </figure>
-
         <div class="demo-controls">
-          <div id="demo-presets" class="demo-presets">
+          <div id="demo-presets" class="app-seg" role="group" aria-label="Detector">
             <button type="button" data-preset="bf" aria-pressed="true">Bright field</button>
             <button type="button" data-preset="adf" aria-pressed="false">Annular dark field</button>
             <button type="button" data-preset="haadf" aria-pressed="false">HAADF</button>
             <button type="button" data-preset="all">Reset region</button>
           </div>
-
-          <div id="demo-maps" class="demo-presets demo-maps">
+          <div id="demo-maps" class="app-seg" role="group" aria-label="Colour map">
             <button type="button" data-map="grey" aria-pressed="true">Grey</button>
             <button type="button" data-map="viridis" aria-pressed="false">Viridis</button>
             <button type="button" data-map="magma" aria-pressed="false">Magma</button>
           </div>
         </div>
+        <p class="app-status"><span class="ok">NiCu alloy</span><span>100 × 100 scan · 32 × 32 detector · 6 nm steps</span><span class="end">Computed in your browser</span></p>
       </div>
     </section>
   </div>
@@ -309,35 +257,35 @@
 
       <ul class="caps">
         <li>
-          <h3>Data exploration</h3>
+          <h3>Data exploration<span class="room-tag">Imaging</span></h3>
           <p>Real and reciprocal space presented together, with calibrated scale bars, contrast control, and GPU-rendered CBED display.</p>
         </li>
         <li>
-          <h3>Virtual imaging</h3>
+          <h3>Virtual imaging<span class="room-tag">Imaging</span></h3>
           <p>Bright-field, annular dark-field, and HAADF geometries, plus arbitrary annular, rectangular, and point detectors positioned interactively on the diffraction plane.</p>
         </li>
         <li>
-          <h3>Calibration</h3>
+          <h3>Calibration<span class="room-tag">Prepare</span></h3>
           <p>Probe and origin fitting across the scan, elliptical distortion correction, real–reciprocal rotation, and reciprocal-space sampling against a known crystal.</p>
         </li>
         <li>
-          <h3>Bragg disk detection</h3>
+          <h3>Bragg disk detection<span class="room-tag">Bragg Disks</span></h3>
           <p>Cross-correlation with parabolic and DFT-upsampled subpixel refinement, and live acceptance diagnostics. Disks can also be found by a trained model running on the Neural Engine.</p>
         </li>
         <li>
-          <h3>Strain mapping</h3>
+          <h3>Strain mapping<span class="room-tag">Crystal Maps · Strain</span></h3>
           <p>Robust local lattice fitting against a whole-scan or region reference, with basis consensus, residual, and indexed fraction reported alongside every map.</p>
         </li>
         <li>
-          <h3>Orientation mapping</h3>
+          <h3>Orientation mapping<span class="room-tag">Crystal Maps · Orientation</span></h3>
           <p>Polar-correlation template matching against a structure from the Materials Project or an imported CIF, with reliability and inverse-pole-figure output.</p>
         </li>
         <li>
-          <h3>Phase reconstruction</h3>
+          <h3>Phase reconstruction<span class="room-tag">Reconstruction</span></h3>
           <p>DPC, iDPC, parallax, and single-slice ptychography.</p>
         </li>
         <li>
-          <h3>Interoperability</h3>
+          <h3>Interoperability<span class="room-tag">Results</span></h3>
           <p>EMD export of Bragg vectors, calibrated datacubes, and preprocessed products, readable directly in py4DSTEM.</p>
         </li>
       </ul>
