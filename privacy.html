@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Privacy policy — mac4DSTEM</title>
-<meta name="description" content="Privacy policy for the mac4DSTEM application and website. The application collects no data and sends nothing off your machine.">
+<title>Privacy policy — mac4DSTEM and macTEM</title>
+<meta name="description" content="Privacy policy for the mac4DSTEM and macTEM applications and this website. Neither application collects data or sends your work off your machine.">
 <link rel="canonical" href="https://mac4dstem.com/privacy.html">
 <meta name="color-scheme" content="light dark">
 <meta name="robots" content="index, follow">
@@ -24,9 +24,9 @@
   <div class="wrap">
     <a class="masthead-mark" href="/"><img src="/assets/icon-512.png" alt="" width="512" height="512"><span>mac<em>4D</em>STEM</span></a>
     <nav aria-label="Sections">
-      <a href="/">Home</a>
-      <a href="/support.html">Support</a>
-      <a href="/impressum.html">Impressum</a>
+      <a href="/">mac4DSTEM</a>
+      <a href="/mactem/">macTEM</a>
+      <a href="/suite/">Kits</a>
     </nav>
   </div>
 </header>
@@ -36,17 +36,19 @@
     <article class="doc">
 
       <h1>Privacy policy</h1>
-      <p class="updated">Last updated 5 October 2026</p>
+      <p class="updated">Last updated 28 October 2026</p>
 
       <p class="lede">
-        mac4DSTEM collects no personal data. The application performs all analysis on your own
-        machine, has no user accounts, and sends nothing to me. Its one network request is a Materials Project fetch that you start yourself.
+        mac4DSTEM and macTEM collect no personal data. Both applications perform all analysis on
+        your own machine, have no user accounts, and send nothing to me. macTEM makes no network
+        connection at all; mac4DSTEM's one network request is a Materials Project fetch that you
+        start yourself.
       </p>
 
-      <h2>The application</h2>
+      <h2>Both applications</h2>
 
       <p>
-        mac4DSTEM is a local desktop application. It does not contain analytics, telemetry,
+        mac4DSTEM and macTEM are local desktop applications. Neither contains analytics, telemetry,
         advertising, crash reporting, or any other component that transmits information about you
         or your work.
       </p>
@@ -54,17 +56,28 @@
       <ul>
         <li><strong>Your datasets and results stay on your Mac.</strong> Datasets you open, the results you compute, and the parameters you choose are read from and written to your own storage only.</li>
         <li><strong>No accounts.</strong> There is no sign-in, no licence server, and no activation.</li>
-        <li><strong>No tracking identifiers.</strong> The application does not generate or store a device or user identifier.</li>
-        <li><strong>One network request, started by you.</strong> “Materials Project…” in the phase picker sends an HTTPS request to api.materialsproject.org carrying your own Materials Project API key and the material ID you typed. The key is kept in the macOS Keychain. The application makes no other connection.</li>
+        <li><strong>No tracking identifiers.</strong> Neither application generates or stores a device or user identifier.</li>
       </ul>
 
       <p>
-        The application runs inside the macOS App Sandbox. It receives access to a file only when
-        you select it in a system Open or Save panel. Where it needs to reopen a file you chose
-        earlier — for example to update a session sidecar — macOS stores a security-scoped
-        bookmark for that specific file on your machine. Those bookmarks stay local and can be
-        removed by deleting the application's container.
+        Both applications run inside the macOS App Sandbox. They receive access to a file only when
+        you select it in a system Open or Save panel. Where one needs to reopen a file you chose
+        earlier — for example to update the session file saved next to your data — macOS stores a
+        security-scoped bookmark for that specific file on your machine. Those bookmarks stay local
+        and can be removed by deleting the application's container.
       </p>
+
+      <h2>mac4DSTEM</h2>
+
+      <ul>
+        <li><strong>One network request, started by you.</strong> “Materials Project…” in the phase picker sends an HTTPS request to api.materialsproject.org carrying your own Materials Project API key and the material ID you typed. The key is kept in the macOS Keychain. The application makes no other connection.</li>
+      </ul>
+
+      <h2>macTEM</h2>
+
+      <ul>
+        <li><strong>No network access.</strong> macTEM is not granted network access by the App Sandbox and makes no connection of any kind.</li>
+      </ul>
 
       <h2>This website</h2>
 
@@ -123,7 +136,7 @@
 
       <p>
         If this policy changes, the revised version is published here with a new date at the top.
-        Material changes affecting the application will accompany a release.
+        Material changes affecting an application will accompany a release of it.
       </p>
 
       <h2>Controller</h2>
