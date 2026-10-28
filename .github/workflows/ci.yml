@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   pull_request:
+  schedule:
+    - cron: "17 6 * * *"   # a new app or kit release turns the release check red until the pages follow
 
 jobs:
   private-refs:
@@ -16,3 +18,13 @@ jobs:
           if git grep -n -I -E '_archive|CLAUDE\.md|memcap|macEM-suite|setup-python-refs' -- ':!.gitignore' ':!.github/workflows/ci.yml'; then
             echo "Private references above; this repo is public."; exit 1
           fi
+
+  site:
+    name: Links and releases
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Internal links, versions and download sizes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 tools/check_site.py

@@ -2,7 +2,8 @@
 """Generate suite/index.html, suite/benchmarks.html and suite/releases.html from the six kits' own files.
 
 Nothing is typed in by hand here except the one-line kit descriptions: versions and dates come from each kit's
-CHANGELOG.md, parity totals from docs/parity.md, benchmark tables from docs/benchmarks.md. Run it after a kit tag:
+CHANGELOG.md, parity totals from docs/parity.md, benchmark tables from docs/benchmarks.md. MacEMUI, the apps' shared
+window package, is listed beside the kits with its version only. Run it after a kit or MacEMUI release:
 
     python3 tools/build_suite_pages.py [--kits DIR]      # DIR holds the kit checkouts (default: ..)
     python3 tools/build_suite_pages.py --fetch           # read the files from github.com at each kit's CHANGELOG tag
@@ -22,6 +23,10 @@ KITS = [  # name, one line (from the kit's README), the Python reference
     ("CuboKit", "The 4D-STEM library: virtual imaging, centre of mass, DPC, strain, Bragg disks, parallax, ptychography.", "py4DSTEM"),
     ("SimulatoKit", "Multislice TEM/STEM simulation: potentials, frozen phonons, scans, detectors, CTF.", "abTEM"),
 ]
+SHELL = ("MacEMUI", "The apps' shared window, controls and Metal image view.")   # an app package: no parity, no benchmarks
+# Benchmark files are written for the kit's developers; sentences about how a table was made in development
+# (sessions, the nightly run, audits) are left off the public page. The tables and the method stay.
+INTERNAL = re.compile(r"\bsessions?\b|\bnightly\b|\baudits?\b|\bROADMAP\b|working tree|\btask \d+|\bCLAUDE\b|mem ?cap|memory cap", re.I)
 E = html.escape
 
 def read(kit, rel, a):
@@ -41,6 +46,12 @@ def inline(s):
     s = re.sub(r"\[([^\]]+)\]\(([^)]+)\)", lambda m: f'{m.group(1)}' if not m.group(2).startswith("http") else f'<a class="u-link" href="{m.group(2)}">{m.group(1)}</a>', s)
     return s
 
+def public(text):
+    """The sentences of a prose line that say nothing about how development is run, without decision labels like (D16)."""
+    text = re.sub(r" ?\(D\d+\)", "", text)
+    parts = re.split(r"(?<=[.;:])\s+(?=[A-Z(*`])", text)
+    return " ".join(x for x in parts if not INTERNAL.search(x))
+
 def cells(line):
     return [c.strip() for c in line.strip().strip("|").split("|")]
 
@@ -49,25 +60,39 @@ def md(text):
     out, lines, i, para = [], text.splitlines(), 0, []
     def flush():
         if para:
-            out.append("<p>" + inline(" ".join(para)) + "</p>"); para.clear()
+            t = public(" ".join(para))
+            if t:
+                out.append("<p>" + inline(t) + "</p>")
+            para.clear()
     while i < len(lines):
         l = lines[i]
         if l.startswith("|") and i + 1 < len(lines) and re.match(r"^\|[\s:|-]+\|?$", lines[i + 1]):
             flush()
             head = cells(l); i += 2; rows = []
             while i < len(lines) and lines[i].startswith("|"):
-                rows.append(cells(lines[i])); i += 1
+                r = cells(lines[i]); i += 1
+                if not any(c.lower().startswith("nightly") for c in r):   # a size not yet measured: no numbers to show
+                    rows.append([public(c) for c in r])
             t = "<div class=\"tablewrap\"><table><thead><tr>" + "".join(f"<th>{inline(c)}</th>" for c in head) + "</tr></thead><tbody>"
             t += "".join("<tr>" + "".join(f"<td>{inline(c)}</td>" for c in r) + "</tr>" for r in rows) + "</tbody></table></div>"
             out.append(t); continue
+        if l.lstrip().startswith("```"):   # commands to re-run a benchmark run in the kit's checkout, not on this page
+            flush(); i += 1
+            while i < len(lines) and not lines[i].lstrip().startswith("```"):
+                i += 1
+            i += 1; continue
         m = re.match(r"^(#{1,4})\s+(.*)", l)
         if m:
             flush(); n = min(len(m.group(1)) + 2, 5)   # page h1 is ours; kit headings start at h3
-            out.append(f"<h{n}>{inline(m.group(2))}</h{n}>")
+            t = public(m.group(2))
+            if t:
+                out.append(f"<h{n}>{inline(t)}</h{n}>")
         elif not l.strip():
             flush()
-        elif l.lstrip().startswith(("- ", "* ", "```")):
-            flush(); out.append("<p>" + inline(l.lstrip("-* ")) + "</p>")
+        elif l.lstrip().startswith(("- ", "* ")):
+            flush(); t = public(l.lstrip("-* "))
+            if t:
+                out.append("<p>" + inline(t) + "</p>")
         else:
             para.append(l.strip())
         i += 1
@@ -99,7 +124,8 @@ th,td{{padding:.3rem .7rem;border-bottom:1px solid color-mix(in srgb,currentColo
   <div class="wrap">
     <a class="masthead-mark" href="/"><img src="/assets/icon-512.png" alt="" width="512" height="512"><span>mac<em>4D</em>STEM</span></a>
     <nav aria-label="Sections">
-      <a href="/">Home</a>
+      <a href="/">mac4DSTEM</a>
+      <a href="/mactem/">macTEM</a>
       <a href="/suite/">Kits</a>
       <a href="/suite/benchmarks.html">Benchmarks</a>
       <a href="/suite/releases.html">Releases</a>
@@ -113,14 +139,28 @@ th,td{{padding:.3rem .7rem;border-bottom:1px solid color-mix(in srgb,currentColo
     </article>
   </div>
 </main>
+<footer class="site-footer">
+  <div class="wrap">
+    <span>Siegen, Germany</span>
+    <nav aria-label="Legal and support">
+      <a href="/support.html">Support</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/impressum.html">Impressum</a>
+    </nav>
+  </div>
+</footer>
 </body>
 </html>
 """
 
+def version(changelog):
+    """Top entry of a CHANGELOG: `## 0.9.0 (2026-10-22)` by hand, `## [0.9.1](compare-url) (2026-10-29)` by release-please."""
+    m = re.search(r"^## \[?(\d+\.\d+\.\d+)\]?(?:\([^)]*\))?(?: \((\d{4}-\d{2}-\d{2})\))?", changelog, re.M)
+    return m.group(1), m.group(2) or ""
+
 def info(kit, a):
     cl = read(kit, "CHANGELOG.md", a)
-    m = re.search(r"^## (\d+\.\d+\.\d+)(?: \((\d{4}-\d{2}-\d{2})\))?", cl, re.M)
-    ver, date = m.group(1), m.group(2) or ""
+    ver, date = version(cl)
     read.tags[kit] = ver
     par = read(kit, "docs/parity.md", a)
     parity = None
@@ -145,6 +185,7 @@ def main():
     out = Path(__file__).resolve().parents[1] / "suite"
     out.mkdir(exist_ok=True)
     data = {k: info(k, a) for k, _, _ in KITS}
+    shell = dict(zip(("ver", "date"), version(read(SHELL[0], "CHANGELOG.md", a))))
 
     rows = ""
     for k, line, ref in KITS:
@@ -157,6 +198,7 @@ def main():
 <p class="lede">Six Swift packages that port the Python electron-microscopy stack to Apple silicon, and the two Mac apps built on them. Every number is checked against the Python package it comes from, within that package's own tolerance.</p>
 <div class="tablewrap"><table><thead><tr><th>Kit</th><th>What it does</th><th>Reference</th><th>Version</th><th>Parity: present of rows</th><th>Docs</th></tr></thead><tbody>
 {rows}</tbody></table></div>
+<p>Beside the kits, <a class="u-link" href="https://github.com/{ORG}/{SHELL[0]}">{SHELL[0]}</a> {shell["ver"]} holds the apps' shared window, controls and Metal image view. It has no Python reference.</p>
 <p>"Parity: present of rows" counts the functions of the reference package that the kit has and has tested against it; each kit's <code>docs/parity.md</code> lists every function with its state and tolerance. See <a class="u-link" href="/suite/benchmarks.html">benchmarks</a> and <a class="u-link" href="/suite/releases.html">releases</a>.</p>
 <p>Apps: <a class="u-link" href="/">mac4DSTEM</a> (4D-STEM) and <a class="u-link" href="/mactem/">macTEM</a> (TEM images, spectroscopy and diffraction).</p>"""
     (out / "index.html").write_text(page("Kits", "The six Swift kits of the macEM suite: what each does, its Python reference, version and parity.", body, ""))
@@ -173,17 +215,16 @@ def main():
     (out / "benchmarks.html").write_text(page("Benchmarks", "Timings of the macEM suite kits against NumPy, SciPy, py4DSTEM, HyperSpy, RosettaSciIO and abTEM.", "\n".join(body), "benchmarks.html"))
 
     rows = ""
-    for k, _, _ in KITS:
-        d = data[k]
+    for k, d in [(k, data[k]) for k, _, _ in KITS] + [(SHELL[0], shell)]:
         rows += (f'<tr><td>{k}</td><td>{d["ver"]}</td><td>{d["date"] or "—"}</td>'
                  f'<td><a class="u-link" href="https://github.com/{ORG}/{k}/releases/tag/{d["ver"]}">tag</a></td>'
                  f'<td><a class="u-link" href="https://github.com/{ORG}/{k}/blob/{d["ver"]}/CHANGELOG.md">changelog</a></td></tr>\n')
     body = f"""<h1>Releases</h1>
-<p class="lede">Latest version of each kit. Tags are bare versions and equal the top entry of the kit's CHANGELOG. The apps pin exact kit tags.</p>
-<div class="tablewrap"><table><thead><tr><th>Kit</th><th>Version</th><th>Date</th><th>Tag</th><th>Changes</th></tr></thead><tbody>
+<p class="lede">Latest version of each kit and of MacEMUI. Tags are bare versions and equal the top entry of the package's CHANGELOG. The apps pin exact tags.</p>
+<div class="tablewrap"><table><thead><tr><th>Package</th><th>Version</th><th>Date</th><th>Tag</th><th>Changes</th></tr></thead><tbody>
 {rows}</tbody></table></div>
-<p>The mac4DSTEM app: <a class="u-link" href="https://github.com/{ORG}/mac4DSTEM/releases">releases on GitHub</a>.</p>"""
-    (out / "releases.html").write_text(page("Releases", "Current versions and tags of the macEM suite kits.", body, "releases.html"))
+<p>The apps: <a class="u-link" href="https://github.com/{ORG}/mac4DSTEM/releases">mac4DSTEM releases</a> and <a class="u-link" href="https://github.com/{ORG}/macTEM/releases">macTEM releases</a> on GitHub.</p>"""
+    (out / "releases.html").write_text(page("Releases", "Current versions and tags of the macEM suite kits and MacEMUI.", body, "releases.html"))
 
 if __name__ == "__main__":
     main()

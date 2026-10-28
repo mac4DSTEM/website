@@ -1,7 +1,9 @@
 # mac4dstem.com
 
-Source for the [mac4DSTEM](https://mac4dstem.com) website — the landing page for a
-free, native macOS application for 4D-STEM analysis.
+Source for [mac4dstem.com](https://mac4dstem.com), the website of the macEM suite: two free,
+native macOS applications for electron microscopy, [mac4DSTEM](https://github.com/mac4DSTEM/mac4DSTEM)
+(4D-STEM) and [macTEM](https://github.com/mac4DSTEM/macTEM) (TEM images, spectra and diffraction),
+and the six Swift kits they are built on.
 
 The site is static: **plain HTML, CSS, and vanilla JavaScript, with no build step,
 no dependencies, and no framework.** Pushing to `main` publishes through GitHub
@@ -22,16 +24,28 @@ opening `index.html` directly from the filesystem will not load the stylesheet.
 
 | Path | Purpose |
 |---|---|
-| `index.html` | Landing page. Page-specific styling lives in its `<style>` block. |
+| `index.html` | The mac4DSTEM page and landing page. Page-specific styling lives in its `<style>` block. |
 | `mactem/index.html` | The macTEM page, in the landing page's style (its own `<style>` block, the demo left out). |
-| `privacy.html` | Privacy policy. |
-| `support.html` | Support, requirements, and known limitations. |
+| `privacy.html` | Privacy policy for both applications and the site. |
+| `support.html` | Support, requirements, and known limitations of both applications. |
 | `impressum.html` | Provider identification (§ 5 DDG). |
+| `404.html` | The page GitHub Pages serves for an unknown address. |
 | `assets/site.css` | Styling shared across all pages. |
 | `assets/demo.js` | The interactive virtual-imaging demo. |
 | `suite/` | Kits overview, benchmarks and releases pages for the macEM suite. Generated, do not edit. |
-| `tools/build_suite_pages.py` | Generates `suite/` from the kits' CHANGELOG, `docs/parity.md` and `docs/benchmarks.md`. Run after a kit tag. |
+| `tools/build_suite_pages.py` | Generates `suite/` from the kits' and MacEMUI's CHANGELOG, `docs/parity.md` and `docs/benchmarks.md`. Run `python3 tools/build_suite_pages.py --fetch` after a kit or MacEMUI release. |
+| `tools/check_site.py` | The CI check: internal links, and versions and download sizes against the GitHub releases. |
 | `tools/export_atlas.py` | Regenerates the demo dataset. Development only. |
+
+## Checks and releases
+
+CI (`.github/workflows/ci.yml`) runs on every push to `main`, on pull requests, and once a day. It scans for
+references to private material and runs `tools/check_site.py`: every internal link and `#fragment` must resolve, each
+app page must state the latest release's version and `.dmg` size (in the text and in the JSON-LD), and
+`suite/releases.html` must name each kit's and MacEMUI's latest tag. Run it locally with
+`python3 tools/check_site.py` (or `--offline` for links only).
+
+After an app release, update the version and size on its page. After a kit or MacEMUI release, regenerate `suite/`.
 
 Everything else in `assets/` is a generated artefact — images, icons, the social
 card, and the demo data. None of it is edited by hand.
@@ -77,10 +91,11 @@ pip install h5py numpy pillow
 ```
 
 ```bash
-python3 tools/export_atlas.py
+python3 tools/export_atlas.py [--src FILE.h5] [--previews DIR]
 ```
 
-This rewrites `assets/demo-atlas.png` and `assets/demo-manifest.json`.
+This rewrites `assets/demo-atlas.png` and `assets/demo-manifest.json`; `--previews` also writes mean-pattern,
+bright-field and dark-field check images to `DIR`.
 
 ## Privacy
 
@@ -90,10 +105,10 @@ uses the system font stack rather than a hosted webfont. See
 
 ## Licence
 
-The mac4DSTEM application is released under the GNU General Public License v3.0. Its
-analysis algorithms are ported from and validated against
-[py4DSTEM](https://github.com/py4dstem/py4DSTEM); work published using mac4DSTEM
-should cite py4DSTEM for the underlying methods.
+The site is released under the GNU General Public License v3.0 ([`LICENSE`](LICENSE)), as are
+both applications and the kits. mac4DSTEM's analysis algorithms are ported from and validated
+against [py4DSTEM](https://github.com/py4dstem/py4DSTEM); work published using mac4DSTEM should
+cite py4DSTEM for the underlying methods.
 
 ## Contact
 

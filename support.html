@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Support — mac4DSTEM</title>
-<meta name="description" content="Support for mac4DSTEM: system requirements, supported file formats, known limitations, and how to report a problem.">
+<title>Support — mac4DSTEM and macTEM</title>
+<meta name="description" content="Support for mac4DSTEM and macTEM: system requirements, supported file formats, known limitations, and how to report a problem.">
 <link rel="canonical" href="https://mac4dstem.com/support.html">
 <meta name="color-scheme" content="light dark">
 <meta name="robots" content="index, follow">
@@ -24,9 +24,9 @@
   <div class="wrap">
     <a class="masthead-mark" href="/"><img src="/assets/icon-512.png" alt="" width="512" height="512"><span>mac<em>4D</em>STEM</span></a>
     <nav aria-label="Sections">
-      <a href="/">Home</a>
-      <a href="/privacy.html">Privacy</a>
-      <a href="/impressum.html">Impressum</a>
+      <a href="/">mac4DSTEM</a>
+      <a href="/mactem/">macTEM</a>
+      <a href="/suite/">Kits</a>
     </nav>
   </div>
 </header>
@@ -36,10 +36,11 @@
     <article class="doc">
 
       <h1>Support</h1>
-      <p class="updated">Last updated 5 October 2026</p>
+      <p class="updated">Last updated 28 October 2026</p>
 
       <p class="lede">
-        Questions, bug reports, and feature requests all go to one address. I read everything.
+        Questions, bug reports, and feature requests for <a class="u-link" href="/">mac4DSTEM</a> and
+        <a class="u-link" href="/mactem/">macTEM</a> all go to one address. I read everything.
       </p>
 
       <div class="contact-block">
@@ -47,18 +48,27 @@
       </div>
 
       <p>
-        mac4DSTEM is developed by one person alongside other work, so replies are not instant —
-        but every report is looked at. There is no support contract and no charge; the application
-        is free.
+        Both applications are developed by one person alongside other work, so replies are not
+        instant — but every report is looked at. There is no support contract and no charge; the
+        applications are free. Reports can also be opened as issues on GitHub:
+        <a class="u-link" href="https://github.com/mac4DSTEM/mac4DSTEM/issues">mac4DSTEM</a>,
+        <a class="u-link" href="https://github.com/mac4DSTEM/macTEM/issues">macTEM</a>.
       </p>
 
       <h2>Requirements</h2>
 
       <ul>
-        <li><strong>macOS 27 or later.</strong> For macOS 14–26, <a class="u-link" href="https://github.com/mac4DSTEM/mac4DSTEM/releases/tag/v3.0.0">version 3.0.0</a> remains available.</li>
+        <li><strong>macOS 27 or later</strong> for mac4DSTEM 5 and macTEM 1. For macOS 14–26, <a class="u-link" href="https://github.com/mac4DSTEM/mac4DSTEM/releases/tag/v3.0.0">mac4DSTEM 3.0.0</a> remains available.</li>
         <li><strong>Apple silicon</strong> — M-series Macs. Intel Macs are not supported.</li>
         <li>No external runtime, toolchain, Python environment, or library installation. Every dependency ships inside the application bundle.</li>
-        <li>Enough free disk space for your datasets and any exported products. Memory needs scale with scan and detector size.</li>
+        <li>Enough free disk space for your datasets and any exported products. Memory needs scale with the size of the scan, detector, image or spectrum image.</li>
+      </ul>
+
+      <h2>What each application opens</h2>
+
+      <ul>
+        <li><strong>mac4DSTEM</strong>: 4D-STEM datasets from py4DSTEM and other EMD/HDF5 files, Gatan DM3/DM4, Merlin MIB and EMPAD RAW, and EDX spectrum images on their own or with the 4D scan.</li>
+        <li><strong>macTEM</strong>: images, stacks and spectrum images from DigitalMicrograph (.dm3, .dm4), Velox (.emd), TIFF and MRC.</li>
       </ul>
 
       <h2>Reporting a problem</h2>
@@ -68,12 +78,11 @@
       </p>
 
       <ul>
-        <li>What you did, what you expected, and what happened instead.</li>
+        <li>Which application, what you did, what you expected, and what happened instead.</li>
         <li>The application version and your macOS version and Mac model.</li>
-        <li>The dataset's format, scan shape, and detector shape — the sidebar reports all three.</li>
-        <li>The step in the workflow where it went wrong (Prepare, Imaging, Bragg Disks, Crystal Maps, Reconstruction, Results).</li>
+        <li>The file's format and shape (scan and detector shape for 4D-STEM, image size or channel count otherwise).</li>
+        <li>The room or step where it went wrong, as named in the sidebar.</li>
         <li>A screenshot of the window, including any diagnostics shown alongside the result.</li>
-        <li>The relevant lines from the log pane at the bottom of the window.</li>
       </ul>
 
       <p>
@@ -84,34 +93,37 @@
       <h2>Known limitations</h2>
 
       <ul>
-        <li>The <strong>Merlin MIB</strong> and <strong>EMPAD RAW</strong> readers are preview-grade, pending further vendor data. If a file from either detector loads incorrectly, a report with the file's header is particularly valuable.</li>
-        <li><strong>Velox <code>.emd</code></strong> spectrum files are not yet supported; EDX analysis is planned for version 5.</li>
-        <li>Verification is numerical: the application is tested against known-correct values rather than against its rendered output.</li>
-        <li>Where a measurement is not quantitatively supported, the result is labelled as such in the interface. Those labels are deliberate — treat them as part of the result.</li>
+        <li>In mac4DSTEM, the <strong>Merlin MIB</strong> and <strong>EMPAD RAW</strong> readers are preview-grade, pending further vendor data. If a file from either detector loads incorrectly, a report with the file's header is particularly valuable.</li>
+        <li>Where a measurement is not yet validated against a dataset with known truth, the result is labelled as such in the interface. Those labels are deliberate — treat them as part of the result.</li>
+        <li>Verification is numerical: every number is tested against the Python package it is ported from, within that package's own tolerance, rather than against the rendered output.</li>
       </ul>
 
       <h2>Results and interoperability</h2>
 
       <p>
-        Bragg vectors, calibrated datacubes, and preprocessed products export to <strong>EMD</strong>
-        and can be read directly in
-        <a class="u-link" href="https://github.com/py4dstem/py4DSTEM">py4DSTEM</a>. If you need a
-        result in a format that is not currently offered, that is a reasonable thing to ask for.
+        mac4DSTEM exports Bragg vectors, calibrated datacubes, and preprocessed products to
+        <strong>EMD</strong>, readable directly in
+        <a class="u-link" href="https://github.com/py4dstem/py4DSTEM">py4DSTEM</a>. macTEM exports its
+        measurements as CSV, spectra as MSA, and images as PNG with a scale bar. If you need a result
+        in a format that is not currently offered, that is a reasonable thing to ask for.
       </p>
 
       <h2>Citing the methods</h2>
 
       <p>
-        The analysis algorithms are ported from py4DSTEM and validated against it. Work published
-        using mac4DSTEM should cite py4DSTEM for the underlying methods.
+        The numerics are ported from the Python packages the field already uses and validated
+        against them; the <a class="u-link" href="/suite/">kits page</a> names each one. Work
+        published using mac4DSTEM should cite py4DSTEM for the underlying methods; work using macTEM
+        should cite the package behind the method used, for example HyperSpy and exSpy for
+        spectroscopy.
       </p>
 
       <h2>Licence</h2>
 
       <p>
-        mac4DSTEM is released under the
+        Both applications are released under the
         <a class="u-link" href="https://www.gnu.org/licenses/gpl-3.0.html">GNU General Public License v3.0</a>.
-        It is free software, provided without warranty of any kind.
+        They are free software, provided without warranty of any kind.
       </p>
 
     </article>

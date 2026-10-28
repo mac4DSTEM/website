@@ -3,14 +3,31 @@
 Layout: scan positions tile a single image, each tile one diffraction pattern.
 Intensities are log-companded to uint8; the page decompands via a 256-entry LUT
 so virtual-image sums stay linear in the original units.
+
+    python3 tools/export_atlas.py [--src FILE.h5] [--previews DIR]
+
+The source defaults to the one .h5 file in datacube/ (gitignored); the atlas and manifest go to assets/. With
+--previews, mean-pattern, bright-field and annular dark-field checks are written to DIR as PNGs.
 """
-import glob, json, math
+import argparse, json, math, sys
+from pathlib import Path
 import h5py
 import numpy as np
 from PIL import Image
 
-SRC = glob.glob('/Users/paullobpreis/GitHub/website/datacube/*.h5')[0]
-OUT = '/Users/paullobpreis/GitHub/website/assets'
+ROOT = Path(__file__).resolve().parents[1]
+ap = argparse.ArgumentParser()
+ap.add_argument('--src', type=Path)
+ap.add_argument('--previews', type=Path)
+args = ap.parse_args()
+if args.src:
+    SRC = args.src
+else:
+    found = sorted((ROOT / 'datacube').glob('*.h5'))
+    if not found:
+        sys.exit('no .h5 file in datacube/: place the source datacube there or pass --src')
+    SRC = found[0]
+OUT = ROOT / 'assets'
 SCAN_BIN = 2          # 200 -> 100, keeps the atlas at 3200x3200 (under Safari's canvas cap)
 
 with h5py.File(SRC, 'r') as h:
@@ -64,6 +81,8 @@ with open(f'{OUT}/demo-manifest.json', 'w') as f:
     json.dump(manifest, f, indent=2)
 
 # ---- sanity previews ----
+if not args.previews:
+    sys.exit(0)
 lut = knee * (np.expm1(np.arange(256) / 255.0 * denom))
 decoded = lut[companded]
 mean_dp = decoded.mean(axis=(0, 1))
@@ -77,7 +96,8 @@ def norm(a, p=99.5):
     hi = np.percentile(a, p)
     return np.uint8(np.clip(a / (hi if hi else 1), 0, 1) * 255)
 
-S = '/private/tmp/claude-501/-Users-paullobpreis-GitHub-website/4e8573a9-16bf-405d-91b9-4ab3a585b68d/scratchpad'
+S = args.previews
+S.mkdir(parents=True, exist_ok=True)
 Image.fromarray(norm(np.log1p(mean_dp))).resize((256, 256), Image.NEAREST).save(f'{S}/chk_meandp.png')
 Image.fromarray(norm(bf)).resize((300, 300), Image.NEAREST).save(f'{S}/chk_bf.png')
 Image.fromarray(norm(adf)).resize((300, 300), Image.NEAREST).save(f'{S}/chk_adf.png')
