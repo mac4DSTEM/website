@@ -36,13 +36,13 @@
     <article class="doc">
 
       <h1>Privacy policy</h1>
-      <p class="updated">Last updated 28 October 2026</p>
+      <p class="updated">Last updated 5 November 2026</p>
 
       <p class="lede">
         mac4DSTEM and macTEM collect no personal data. Both applications perform all analysis on
-        your own machine, have no user accounts, and send nothing to me. macTEM makes no network
-        connection at all; mac4DSTEM's one network request is a Materials Project fetch that you
-        start yourself.
+        your own machine, have no user accounts, and send nothing to me. The versions from the Mac App
+        Store make no connection beyond a Materials Project fetch in mac4DSTEM that you start yourself;
+        the versions downloaded from GitHub also check for updates.
       </p>
 
       <h2>Both applications</h2>
@@ -70,13 +70,21 @@
       <h2>mac4DSTEM</h2>
 
       <ul>
-        <li><strong>One network request, started by you.</strong> “Materials Project…” in the phase picker sends an HTTPS request to api.materialsproject.org carrying your own Materials Project API key and the material ID you typed. The key is kept in the macOS Keychain. The application makes no other connection.</li>
+        <li><strong>One network request, started by you.</strong> “Materials Project…” in the phase picker sends an HTTPS request to api.materialsproject.org carrying your own Materials Project API key and the material ID you typed. The key is kept in the macOS Keychain. The application makes no other connection, apart from the update check of the downloaded version (below).</li>
       </ul>
 
       <h2>macTEM</h2>
 
       <ul>
-        <li><strong>No network access.</strong> macTEM is not granted network access by the App Sandbox and makes no connection of any kind.</li>
+        <li><strong>No network access from the App Store version.</strong> The Mac App Store version of macTEM is not granted network access by the App Sandbox and makes no connection of any kind. The downloaded version makes only the update check below.</li>
+      </ul>
+
+      <h2>Update check (downloaded versions only)</h2>
+
+      <ul>
+        <li><strong>What it sends.</strong> The versions downloaded from GitHub use Sparkle to check for updates. Once a day at most, and only if you leave “Check for updates automatically” on, the application fetches a small update feed over HTTPS from the project's GitHub releases. The request carries the application's name and version and the macOS version, as any web request's User-Agent does. No identifier, no usage data and nothing about your datasets is sent.</li>
+        <li><strong>Turning it off.</strong> You can switch automatic checks off in the application's settings, or use “Check for Updates…” only when you choose.</li>
+        <li><strong>The App Store versions</strong> contain no update checker; the App Store updates them.</li>
       </ul>
 
       <h2>This website</h2>
