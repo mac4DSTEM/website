@@ -96,7 +96,12 @@ def check_releases():
     for app, rel in APPS.items():
         r = latest(app)
         ver = r["tag_name"].lstrip("v")
-        dmg = next(a for a in r["assets"] if a["name"] == f"{app}.dmg")
+        dmg = next((a for a in r["assets"] if a["name"] == f"{app}.dmg"), None)
+        if dmg is None:
+            errors.append(f"{rel}: the latest {app} release {r['tag_name']} has no {app}.dmg, so the page's "
+                          f"releases/latest/download/{app}.dmg link is a 404: build it with tools/release.sh "
+                          "on that tag and attach it")
+            continue
         size = f"{dmg['size'] / 1e6:.1f} MB"
         text = (ROOT / rel).read_text()
         for stated in sorted(set(re.findall(r"Version (\d+\.\d+\.\d+)", text))):
