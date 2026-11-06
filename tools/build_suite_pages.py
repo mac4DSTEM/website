@@ -13,8 +13,8 @@ The output is committed; the site has no build step. Standard library only.
 import argparse, html, re, sys, urllib.request
 from pathlib import Path
 
-ORG = "mac4DSTEM"
-PAGES = "https://mac4dstem.github.io"   # per-kit DocC sites (kit repo Pages)
+ORG = "macEMSuite"
+PAGES = "https://macemsuite.github.io"   # per-kit DocC sites (kit repo Pages)
 KITS = [  # name, one line (from the kit's README), the Python reference
     ("FormatoKit", "File formats for electron microscopy: Velox EMD, DM3/DM4, HDF5/EMD, MRC, TIFF, MIB, EMPAD.", "RosettaSciIO"),
     ("ImagoKit", "Image numerics: FFT, profiles, filters, alignment, measurement, segmentation.", "NumPy, SciPy, scikit-image"),
