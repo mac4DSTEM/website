@@ -1,0 +1,71 @@
+      <p class="kicker">Get started</p>
+      <h1>Open your data</h1>
+      <p class="lede">Which files mac4DSTEM reads, how to open a dataset that is larger than your Mac's memory, how the window is laid out and where your work is saved.</p>
+
+      <h2 id="formats">File formats</h2>
+      <div class="tablewrap"><table>
+        <thead><tr><th>Format</th><th>Files</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td>HDF5 and EMD</td><td class="plain"><code>.h5</code> <code>.hdf5</code> <code>.emd</code></td><td>py4DSTEM, Gatan, HyperSpy and other EMD layouts.</td></tr>
+          <tr><td>Gatan</td><td><code>.dm3</code> <code>.dm4</code></td><td>4D-STEM datacubes written by DigitalMicrograph.</td></tr>
+          <tr><td>Merlin</td><td><code>.mib</code></td><td>Preview-grade. Keep the <code>.hdr</code> file beside it.</td></tr>
+          <tr><td>EMPAD</td><td><code>.raw</code></td><td>Preview-grade. Keep the <code>.xml</code> file beside it.</td></tr>
+        </tbody>
+      </table></div>
+      <p>EDS spectrum images open in the Spectroscopy workspace, on their own or together with the 4D scan.</p>
+
+      <h2 id="open">Three ways to open</h2>
+      <ul>
+        <li>Choose <span class="ui">File › Open Dataset…</span> (<kbd>⌘O</kbd>), or the button of the same name in the welcome window.</li>
+        <li>Drag a file onto the window.</li>
+        <li>Pick it from <span class="ui">File › Open Recent</span>.</li>
+      </ul>
+      <p>Each dataset opens in its own window. <span class="ui">File › New Dataset Window</span> (<kbd>⌘N</kbd>) gives you a second one.</p>
+
+      <h2 id="large">Large datasets</h2>
+      <p>
+        <span class="ui">Open with Options…</span> shows a preview before anything is loaded and lets you make the dataset smaller.
+        The source file is never changed.
+      </p>
+      <ul>
+        <li><strong>Crop the scan</strong> to the region you care about.</li>
+        <li><strong>Crop the detector.</strong> This limits the angular range.</li>
+        <li><strong>Bin the detector.</strong> This keeps the angular range but makes disk positions coarser. Counts per pixel grow with the bin factor squared, so recheck any absolute threshold afterwards.</li>
+        <li><strong>Keep in memory</strong>, or turn it off to let the analyses read from disk in bounded pieces. The sheet shows the size of your selection against the memory of your Mac and warns when it takes more than half.</li>
+      </ul>
+      <p>
+        To make a smaller file once and keep it, use <span class="ui">Preprocess Raw Data…</span>. It writes a cropped,
+        binned and hot-pixel-filtered copy as a py4DSTEM datacube and leaves the original alone.
+      </p>
+
+      <h2 id="window">The window</h2>
+      <ul>
+        <li><strong>Sidebar, left.</strong> Seven workspaces in the order the data flows: Prepare, Imaging, Bragg Disks, Crystal Maps, Reconstruction, Spectroscopy and Results. <kbd>⌘1</kbd> to <kbd>⌘7</kbd> switch between them.</li>
+        <li><strong>Panes, centre.</strong> The diffraction pattern and the real-space image, side by side.</li>
+        <li><strong>Inspector, right.</strong> The settings of the workspace you are in. Changes show in the panes while you make them.</li>
+        <li><strong>Toolbar.</strong> One main action per workspace, such as <span class="ui">Detect All Disks</span>. Work over the whole scan starts only when you press it, shows its progress and can be cancelled.</li>
+        <li><strong>Output and Lineage, bottom.</strong> Output is the log of what ran. Lineage shows every step that led to a result.</li>
+      </ul>
+      <p>Switching workspaces never starts a computation and never discards one.</p>
+
+      <h2 id="sessions">Sessions: where your work is saved</h2>
+      <p>
+        mac4DSTEM saves calibration and results in a session file beside the dataset, named after it and ending in
+        <code>.mac4dstem.h5</code>. Your dataset itself is never written to.
+      </p>
+      <ul>
+        <li><span class="ui">Dataset › Save Calibration to Session Sidecar</span> saves the calibration.</li>
+        <li><span class="ui">Dataset › Save Current Result to Session Sidecar</span> saves the result on screen.</li>
+        <li>When you open the dataset again, the session is found and restored.</li>
+      </ul>
+      <p>
+        macOS only lets an app read the files you picked. If the session file is not picked up, choose
+        <span class="ui">Dataset › Allow Access to Session Sidecar…</span> once and select it.
+      </p>
+
+      <h2 id="export">Export</h2>
+      <ul>
+        <li><span class="ui">File › Export Result PNG…</span> and <span class="ui">Export Diffraction PNG…</span> save what the panes show.</li>
+        <li>The Results workspace exports figures and data. Bragg vectors, datacubes and maps are written as EMD files that py4DSTEM reads.</li>
+        <li>Every export records the method the result came from and its calibration.</li>
+      </ul>

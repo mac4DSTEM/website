@@ -1,0 +1,49 @@
+      <p class="kicker">Help</p>
+      <h1>Troubleshooting</h1>
+      <p class="lede">Common problems and what to do about them. If yours is not here, <a href="/support.html">write to me or open an issue</a>.</p>
+
+      <h2>Installing and opening the app</h2>
+      <h3>The app does not open</h3>
+      <p>mac4DSTEM needs macOS 26 or later on an Apple silicon Mac. On macOS 14 to 25, use <a href="https://github.com/mac4DSTEM/mac4DSTEM/releases/tag/v3.0.0">version 3.0.0</a>.</p>
+
+      <h2>Opening data</h2>
+      <h3>My file does not open, or opens as the wrong dataset</h3>
+      <p>
+        Check that the format is in the <a href="/docs/open-data.html#formats">list of formats</a>. The Merlin and EMPAD readers
+        are preview-grade. If a file in a listed format fails, please report it with the format, the scan and detector size
+        and the program that wrote it. A small example file helps most.
+      </p>
+      <h3>A Merlin or EMPAD file opens without its settings</h3>
+      <p>Keep the companion file (<code>.hdr</code> for Merlin, <code>.xml</code> for EMPAD) in the same folder as the data. If the app asks for access to it, allow it.</p>
+      <h3>The dataset is larger than my Mac's memory</h3>
+      <p>Use <span class="ui">Open with Options…</span> to crop or bin before loading, or turn off <span class="ui">Keep in memory</span> so the analyses read from disk. See <a href="/docs/open-data.html#large">Large datasets</a>.</p>
+      <h3>My saved session did not come back</h3>
+      <p>The session file must sit beside the dataset and keep its name. If it is there and is not picked up, choose <span class="ui">Dataset › Allow Access to Session Sidecar…</span> and select it.</p>
+      <h3>A workspace in the sidebar is greyed out</h3>
+      <p>Spectroscopy needs an EDS spectrum image. The other workspaces except Results need a 4D scan. A window that holds only a spectrum image offers Spectroscopy and Results.</p>
+
+      <h2>Imaging and calibration</h2>
+      <h3>The BF, ADF and HAADF presets do not fit my pattern</h3>
+      <p>The presets are fractions of the detector until the beam has been measured. Run <span class="ui">Calibrate Origin</span> in Prepare, then apply the preset again.</p>
+      <h3>The scale bar is in pixels</h3>
+      <p>The file carries no scan step size, and it cannot be measured from the data. Enter the R pixel size in Prepare from your acquisition settings.</p>
+      <h3>A result is marked "not quantitative"</h3>
+      <p>A calibration step it depends on is missing or failed its check. The readiness list in Prepare shows which one; rest the pointer on a row to read what it unlocks. See the <a href="/docs/tutorials/calibration.html">calibration tutorial</a>.</p>
+      <h3>Fit Ellipse is refused</h3>
+      <p>The fit needs a ring with signal all the way round. Spots from a few grains fit an ellipse as well as a distorted detector does, so the app refuses instead of giving a wrong correction. Move the annulus onto a ring from an amorphous or polycrystalline area, or leave the ellipse unset.</p>
+
+      <h2>Bragg disks</h2>
+      <h3>No disks are found</h3>
+      <p>Build a probe kernel first (<span class="ui">Build Kernel</span>). Then check that its probe radius matches the disks in your pattern, and lower <span class="ui">Minimum relative</span> and <span class="ui">Minimum absolute</span> under Advanced detection.</p>
+      <h3>Too many false disks</h3>
+      <p>Raise <span class="ui">Minimum relative</span>, raise <span class="ui">Minimum spacing</span> to about the distance between neighbouring disks, and add a little <span class="ui">Correlation smoothing σ</span>. The <a href="/docs/tutorials/bragg-disks.html#judge">Bragg disks tutorial</a> shows how to read the acceptance funnel.</p>
+      <h3>"Detection settings changed — rerun Detect All Disks"</h3>
+      <p>You changed a detection setting after the last full run. Strain and orientation maps use the disks of the last full run, so press <span class="ui">Detect All Disks</span> again before computing them.</p>
+
+      <h2>Reporting a problem</h2>
+      <p>
+        Please include the mac4DSTEM version, the file format, the scan and detector size and what you expected to see.
+        A difference from py4DSTEM with the numbers attached is the most useful report of all.
+        <a href="https://github.com/mac4DSTEM/mac4DSTEM/issues">Open an issue on GitHub</a> or write to
+        <a href="mailto:mail@mac4dstem.com">mail@mac4dstem.com</a>.
+      </p>
