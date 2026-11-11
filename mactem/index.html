@@ -4,16 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>macTEM — native TEM image and spectrum analysis for Apple silicon</title>
-<meta name="description" content="macTEM is a native macOS application for TEM: calibrated images and FFTs, EDS and EELS spectrum images with quantification, and electron diffraction, running natively on Apple silicon.">
+<title>macEM — native TEM and SEM analysis for Apple silicon</title>
+<meta name="description" content="macEM is a native macOS application for TEM and SEM: calibrated images and FFTs, electron diffraction, EBSD patterns, indexing and orientation maps, and EDS and EELS with quantification, running natively on Apple silicon.">
 <link rel="canonical" href="https://mac4dstem.com/mactem/">
 <meta name="color-scheme" content="light dark">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="macEM">
 <meta property="og:url" content="https://mac4dstem.com/mactem/">
-<meta property="og:title" content="macTEM — native TEM image and spectrum analysis for Apple silicon">
-<meta property="og:description" content="A native macOS application for TEM: calibrated images and FFTs, EDS and EELS spectrum images with quantification, and electron diffraction, natively on Apple silicon.">
+<meta property="og:title" content="macEM — native TEM and SEM analysis for Apple silicon">
+<meta property="og:description" content="A native macOS application for TEM and SEM: calibrated images and FFTs, electron diffraction, EBSD patterns, indexing and orientation maps, and EDS and EELS with quantification, natively on Apple silicon.">
 <meta property="og:image" content="https://mac4dstem.com/assets/mactem-og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -32,9 +32,9 @@
 
 <header class="masthead">
   <div class="wrap">
-    <a class="masthead-mark" href="/mactem/"><span>mac<em>TEM</em></span></a>
+    <a class="masthead-mark" href="/mactem/"><span>mac<em>EM</em></span></a>
     <nav aria-label="Sections">
-      <a href="#rooms">Rooms</a>
+      <a href="#capabilities">Capabilities</a>
       <a href="#validation">Validation</a>
       <a href="/">mac4DSTEM</a>
       <a href="/suite/">Kits</a>
@@ -51,14 +51,14 @@
       <p class="eyebrow">Version 1.3.0 · part of the macEM suite, beside <a class="u-link" href="/">mac4DSTEM</a></p>
 
       <div class="hero-head">
-        <h1 class="wordmark">mac<em>TEM</em></h1>
+        <h1 class="wordmark">mac<em>EM</em></h1>
       </div>
 
-      <p class="tagline">TEM images, spectra and diffraction, native on Apple silicon.</p>
+      <p class="tagline">TEM and SEM images, spectra and diffraction, native on Apple silicon.</p>
 
       <p class="lede">
-        Open a micrograph or a spectrum image, look, measure, and export a figure, with every
-        number traceable to the method and reference it came from.
+        Open a micrograph, a spectrum image or an EBSD scan, look, measure, and export a figure,
+        with every number traceable to the method and reference it came from.
       </p>
 
       <div class="get" id="download">
@@ -90,7 +90,7 @@
           <img
             src="/assets/mactem-workspace.jpg"
             width="1600" height="882"
-            alt="The macTEM Image room: a STEM image at its calibration with a distance measurement, the rooms in the sidebar, and calibration, display, measurement and particle settings in the inspector."
+            alt="The macEM Image room: a STEM image at its calibration with a distance measurement, the rooms in the sidebar, and calibration, display, measurement and particle settings in the inspector."
             loading="lazy" decoding="async">
         </picture>
         <figcaption>
@@ -102,33 +102,45 @@
   </div>
 
   <div class="wrap">
-    <section class="band" id="rooms" aria-labelledby="rooms-h">
-      <h2 class="section-label" id="rooms-h">Rooms</h2>
+    <section class="band" id="capabilities" aria-labelledby="capabilities-h">
+      <h2 class="section-label" id="capabilities-h">Capabilities</h2>
 
       <ul class="caps">
         <li>
-          <h3>Image</h3>
-          <p>DM3/DM4, TIFF stacks, MRC and Velox EMD at their calibration. Contrast, distances, angles, profiles, particles.</p>
+          <h3>Images<span class="room-tag">Imaging · Image</span></h3>
+          <p>DM3/DM4, Velox EMD, TIFF stacks, MRC and SEM TIFFs at their calibration. Contrast, distances, angles, profiles, particles.</p>
         </li>
         <li>
-          <h3>FFT</h3>
+          <h3>FFT<span class="room-tag">Imaging · FFT</span></h3>
           <p>The live transform, radial profile, spot d-spacings, a masked inverse and HRTEM filters.</p>
         </li>
         <li>
-          <h3>EDS</h3>
-          <p>Velox and GMS spectrum images. Auto ID, Cliff-Lorimer and zeta quantification, wt% and at% maps, regions.</p>
+          <h3>Diffraction<span class="room-tag">Diffraction</span></h3>
+          <p>Calibrate on a ring or from the file, fit rings, index spots against a standard or a CIF.</p>
         </li>
         <li>
-          <h3>EELS</h3>
-          <p>GMS spectrum images. t/λ maps and edge quantification with uncertainties, 383 edges across 95 elements.</p>
+          <h3>EBSD patterns<span class="room-tag">EBSD · Patterns</span></h3>
+          <p>h5ebsd, EDAX, Oxford and NORDIF scans. Backgrounds, filters, NLPAR, virtual BSE.</p>
         </li>
         <li>
-          <h3>Diffraction</h3>
-          <p>Calibrate from a ring or the file, fit rings, index spots against a standard or a CIF.</p>
+          <h3>Indexing<span class="room-tag">EBSD · Indexing</span></h3>
+          <p>Hough or dictionary indexing against a master pattern, for one or several phases.</p>
         </li>
         <li>
-          <h3>Results</h3>
-          <p>Every measurement in one place; CSV, MSA, PNG with scale bar, and the method as JSON.</p>
+          <h3>Orientation maps<span class="room-tag">EBSD · Maps</span></h3>
+          <p>IPF and phase maps, grains, KAM, GOS, GND, slip, pole figures and ODF.</p>
+        </li>
+        <li>
+          <h3>EDS<span class="room-tag">Spectroscopy · EDS</span></h3>
+          <p>TEM spectrum images and SEM-EDS from Bruker, EDAX and JEOL. Cliff-Lorimer and zeta quantification, maps, regions.</p>
+        </li>
+        <li>
+          <h3>EELS<span class="room-tag">Spectroscopy · EELS</span></h3>
+          <p>t/λ maps and edge quantification with uncertainties, 383 edges across 95 elements.</p>
+        </li>
+        <li>
+          <h3>Results<span class="room-tag">Results</span></h3>
+          <p>Every measurement in one place. CSV, MSA, PNG with scale bar, a session report, and the method as JSON.</p>
         </li>
       </ul>
     </section>
@@ -144,8 +156,9 @@
             The numerics live in the open <a class="u-link" href="/suite/">macEM kits</a>, each
             tested against the Python package the field already uses: RosettaSciIO for files,
             NumPy, SciPy and scikit-image for images, pymatgen for crystallography, HyperSpy and
-            exSpy for spectroscopy. <strong>A result not yet validated against a standard is
-            labelled so.</strong>
+            exSpy for spectroscopy. The SEM rooms are ported into the app and checked the same
+            way, against kikuchipy, PyEBSDIndex, orix and DefDAP for EBSD. <strong>A result not
+            yet validated against a standard is labelled so.</strong>
           </p>
           <p>
             EELS cross sections are the generalised oscillator strengths of Segger, Guzzinati and
@@ -169,7 +182,7 @@
     <section class="band" id="contact" aria-labelledby="contact-h">
       <div class="contact">
         <h2 id="contact-h">Questions, issues, collaboration</h2>
-        <p>If you work with TEM data and something here is useful, or missing, I would like to hear about it.</p>
+        <p>If you work with TEM or SEM data and something here is useful, or missing, I would like to hear about it.</p>
         <a class="mail" href="mailto:mail@mac4dstem.com">mail@mac4dstem.com</a>
       </div>
     </section>
@@ -192,7 +205,7 @@
 {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "macTEM",
+  "name": "macEM",
   "url": "https://mac4dstem.com/mactem/",
   "applicationCategory": "ScientificApplication",
   "operatingSystem": "macOS 26 or later, Apple silicon",
@@ -200,7 +213,7 @@
   "downloadUrl": "https://github.com/mac4DSTEM/macTEM/releases/latest/download/macTEM.dmg",
   "fileSize": "18.0 MB",
   "license": "https://www.gnu.org/licenses/gpl-3.0.html",
-  "description": "A native macOS application for TEM: calibrated images and FFTs, EDS and EELS spectrum images with quantification, and electron diffraction, computed natively on Apple silicon.",
+  "description": "A native macOS application for TEM and SEM: calibrated images and FFTs, electron diffraction, EBSD patterns, indexing and orientation maps, and EDS and EELS with quantification, computed natively on Apple silicon.",
   "offers": {
     "@type": "Offer",
     "price": "0",
