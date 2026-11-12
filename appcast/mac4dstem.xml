@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+  <channel>
+    <title>mac4DSTEM</title>
+    <link>https://mac4dstem.com/</link>
+    <item>
+      <title>mac4DSTEM 5.3.0</title>
+      <pubDate>Thu, 12 Nov 2026 22:05:32 GMT</pubDate>
+      <sparkle:version>5.3.0</sparkle:version>
+      <sparkle:shortVersionString>5.3.0</sparkle:shortVersionString>
+      <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
+      <sparkle:fullReleaseNotesLink>https://github.com/mac4DSTEM/mac4DSTEM/releases/tag/v5.3.0</sparkle:fullReleaseNotesLink>
+      <description sparkle:format="plain-text">Features
+
+* agent door pattern views: a cut of the pattern, the pattern without disk circles, raw counts around a pixel (#234) (3a4e3d5)
+* agent door pattern views: a cut of the pattern, the pattern without disk circles, raw counts around a pixel (#248) (3a4e3d5)
+* agent door phase list: add a phase from a CIF, mark the matrix, set a phase's excitation slab, read the last run (#251) (f32331b)
+* agent door sets the remaining disk detection fields: subpixel, upsampling, pattern smoothing, absolute threshold, reference peak (#235) (9fa0f91)
+* agent door sets the remaining disk detection fields: subpixel, upsampling, pattern smoothing, absolute threshold, reference peak (#241) (9fa0f91)
+* agent door setup notes, and a scan map frame an agent can find (#237) (3077449)
+* agent door setup notes, and a scan map frame an agent can find (#249) (3077449)
+* agent door workflow guide: how to work through a scan and judge each step (#236) (0c985da)
+* agent door workflow guide: how to work through a scan and judge each step (#247) (0c985da)
+* agent door: an Agent folder for batches: an agent lists, opens and saves results in one folder the person chooses (#205) (324bf74)
+* agent door: Claude and other agents on this Mac look at mac4DSTEM's windows over MCP (#157) (1b325f7)
+* agent door: get_scan_map, the scan map in scan coordinates, so an agent picks a precipitate's position (#213) (52520e7)
+* agent door: probe kernel tools: an agent reads and sets the probe radius, builds the kernel and picks the detector (#212) (4b470b9)
+* agent door: run and tune: an agent moves to a scan position, tunes disk detection, and presses Run and Stop (#202) (e85eb30)
+* agent door: select_task, and Phase mapping's settings for an agent to read and set (#215) (5743f93)
+* agent door: set_calibration and run_calibration, Prepare's calibration for an agent (#216) (662d153)
+* Check for Updates… in the website download (Sparkle) (#182) (a5cd2fb)
+* Count variants on a phase map made from the structures (#253) (1b7addc)
+* Fit Distortion from Spots in Prepare, for a scan of one crystal (#220) (b08c0ba)
+* Map Phases finds the orientations from the structures; typed zone axes become an Advanced switch (#243) (0270842)
+* open Merlin's multi-file save and EMPAD pairs of other names, asking once for the folder under the sandbox (#183) (61f5a4d)
+* Settings shows how much the learned detector's model caches hold (#181) (1c7921f)
+* the agent door reaches every analysis (#255) (011762c)
+* the Al–Mg–Si preset leaves the Add Phase menu (#250) (6cb9b24)
+
+
+Bug Fixes
+
+* a Cancel at the companion folder prompt is a status line, not an error, and a granted folder is remembered across launches (#187) (70816d0)
+* a cleared or typed Q scale stays cleared on a rewind, and ptychography reads stale after a new origin or Q (#154) (39064d6)
+* a file opened from Finder fills the empty window instead of opening a second one (#166) (45ad430)
+* a HyperSpy file's Q and R pixel scale are read from its axes (#214) (a9585d2)
+* a reopened session has its imported phases and phase-mapping settings back (#152) (be6c77c)
+* a reopened session's phase-mapping run is named in the Phases section (#149) (8e9f7aa)
+* agent door answers agree: a point in numbers, one subpixel name, can_run, unreadable sidecar named (#233) (18a1168)
+* agent door answers agree: a point in numbers, one subpixel name, can_run, unreadable sidecar named (#240) (18a1168)
+* agent door says when a kernel or probe radius moves a disk setting, and logs every agent action (#232) (929b655)
+* agent door says when a kernel or probe radius moves a disk setting, and logs every agent action (#239) (929b655)
+* agent door: the pattern picture shows the detected disks as a Retina pane does (#188) (76cf9c6)
+* Calibrate Q from crystal asks for an approximate pixel size when the rings fit two shells (#177) (52b32ef)
+* Calibrate Q from crystal lets the file's pixel size decide between two ring assignments (#171) (0261651)
+* Calibrate Q from crystal uses DiffractoKit 0.12.1 and asks which ring when two assignments fit equally (#170) (89c5729)
+* composition per object is fitted with the method the room's fit ran with (#172) (a129335)
+* composition per object is one pooled fit of the object's summed spectrum (#158) (d727e78)
+* Crystal Maps and DPC controls say what they mean; Advanced rows open on the whole row (#277) (20bd1ac)
+* disk detection uses py4DSTEM's defaults (minimum relative intensity 0.5 %, multicorr) (#270) (6658a95), closes #269
+* emptying the thickness field removes the thickness and its N_V (#146) (c72f023)
+* Map Phases ignores peaks beyond the reference library's reach (#222) (3b47c5e), closes #221
+* no probe radius is stored when the pattern holds several disks as bright as the beam (#217) (80f7d5e)
+* on a spot pattern the Origin &amp; probe row points to Origin from Bragg Peaks (#219) (7e9e85d)
+* on-screen numbers follow the Mac's Region everywhere (#268) (7fe3cbf), closes #267
+* status lines and messages say what happened (#272) (cd31fd5)
+* the ACOM scale slider keeps the orientation map, and a rewind puts ptychography controls back (#167) (6a6e00c)
+* the Dataset menu says Session, and four more texts from the final 5.3.0 check (#281) (98a170d)
+* the detector model is compiled once and kept, so Core ML's cache stops growing (002e31f)
+* the disk detector model is compiled once and kept, so the Core ML cache stops growing (#151) (002e31f)
+* the Help menu opens the support page and Send Feedback (#150) (ba76b66)
+* the object table updates when the per-object fits land and shows composition in the user's number format (#174) (57c7bbb)
+* the phase map title counts the listed candidates after a session is reopened (#176) (387f986)
+* the sidebar's Allow Access… button takes its own press again (#165) (2b0dfdf)
+* two files of one name (scan.h5, scan.dm4) never share or overwrite a session (#147) (7fe1205)
+* two sources of one stem never share or overwrite a session (7fe1205)
+* variant numbers do not depend on which equivalent matrix angle the matcher returns (#159) (7bcf0f2)</description>
+      <enclosure url="https://github.com/mac4DSTEM/mac4DSTEM/releases/download/v5.3.0/mac4DSTEM-5.3.0.dmg" type="application/octet-stream" sparkle:edSignature="yEi5GE1m9h4s2PTIH4E8V1OA27ut/jM6fU/75Q9IWsLsdTzstILVBvCqxEJvvOy1lwPrqfDXUA4sASRj8J5tAA==" length="19431784"/>
+    </item>
+  </channel>
+</rss>
