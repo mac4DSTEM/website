@@ -125,7 +125,7 @@ th,td{{padding:.3rem .7rem;border-bottom:1px solid color-mix(in srgb,currentColo
     <a class="masthead-mark" href="/"><img src="/assets/icon-512.png" alt="" width="512" height="512"><span>mac<em>4D</em>STEM</span></a>
     <nav aria-label="Sections">
       <a href="/">mac4DSTEM</a>
-      <a href="/mactem/">macTEM</a>
+      <a href="/mactem/">macEM</a>
       <a href="/suite/">Kits</a>
       <a href="/suite/benchmarks.html">Benchmarks</a>
       <a href="/suite/releases.html">Releases</a>
@@ -200,7 +200,7 @@ def main():
 {rows}</tbody></table></div>
 <p>Beside the kits, <a class="u-link" href="https://github.com/{ORG}/{SHELL[0]}">{SHELL[0]}</a> {shell["ver"]} holds the apps' shared window, controls and Metal image view. It has no Python reference.</p>
 <p>"Parity: present of rows" counts the functions of the reference package that the kit has and has tested against it; each kit's <code>docs/parity.md</code> lists every function with its state and tolerance. See <a class="u-link" href="/suite/benchmarks.html">benchmarks</a> and <a class="u-link" href="/suite/releases.html">releases</a>.</p>
-<p>Apps: <a class="u-link" href="/">mac4DSTEM</a> (4D-STEM) and <a class="u-link" href="/mactem/">macTEM</a> (TEM images, spectroscopy and diffraction).</p>"""
+<p>Apps: <a class="u-link" href="/">mac4DSTEM</a> (4D-STEM) and <a class="u-link" href="/mactem/">macEM</a> (TEM and SEM images, spectroscopy and diffraction).</p>"""
     (out / "index.html").write_text(page("Kits", "The six Swift kits of the macEM suite: what each does, its Python reference, version and parity.", body, ""))
 
     body = ["<h1>Benchmarks</h1>",
@@ -223,7 +223,7 @@ def main():
 <p class="lede">Latest version of each kit and of MacEMUI. Tags are bare versions and equal the top entry of the package's CHANGELOG. The apps pin exact tags.</p>
 <div class="tablewrap"><table><thead><tr><th>Package</th><th>Version</th><th>Date</th><th>Tag</th><th>Changes</th></tr></thead><tbody>
 {rows}</tbody></table></div>
-<p>The apps: <a class="u-link" href="https://github.com/{ORG}/mac4DSTEM/releases">mac4DSTEM releases</a> and <a class="u-link" href="https://github.com/{ORG}/macTEM/releases">macTEM releases</a> on GitHub.</p>"""
+<p>The apps: <a class="u-link" href="https://github.com/{ORG}/mac4DSTEM/releases">mac4DSTEM releases</a> and <a class="u-link" href="https://github.com/{ORG}/macTEM/releases">macEM releases</a> on GitHub.</p>"""
     (out / "releases.html").write_text(page("Releases", "Current versions and tags of the macEM suite kits and MacEMUI.", body, "releases.html"))
 
 if __name__ == "__main__":

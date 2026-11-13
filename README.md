@@ -25,7 +25,7 @@ opening `index.html` directly from the filesystem will not load the stylesheet.
 | Path | Purpose |
 |---|---|
 | `index.html` | The mac4DSTEM page and landing page. Page-specific styling lives in its `<style>` block. |
-| `mactem/index.html` | The macTEM page, in the landing page's style (its own `<style>` block, the demo left out). |
+| `mactem/index.html` | The macEM page (macTEM up to 1.3), in the landing page's style (its own `<style>` block, the demo left out). |
 | `privacy.html` | Privacy policy for both applications and the site. |
 | `support.html` | Support, requirements, and known limitations of both applications. |
 | `impressum.html` | Provider identification (§ 5 DDG). |
