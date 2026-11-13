@@ -223,7 +223,7 @@ def main():
 <p class="lede">Latest version of each kit and of MacEMUI. Tags are bare versions and equal the top entry of the package's CHANGELOG. The apps pin exact tags.</p>
 <div class="tablewrap"><table><thead><tr><th>Package</th><th>Version</th><th>Date</th><th>Tag</th><th>Changes</th></tr></thead><tbody>
 {rows}</tbody></table></div>
-<p>The apps: <a class="u-link" href="https://github.com/{ORG}/mac4DSTEM/releases">mac4DSTEM releases</a> and <a class="u-link" href="https://github.com/{ORG}/macTEM/releases">macEM releases</a> on GitHub.</p>"""
+<p>The apps: <a class="u-link" href="https://github.com/{ORG}/mac4DSTEM/releases">mac4DSTEM releases</a> and <a class="u-link" href="https://github.com/{ORG}/macEM/releases">macEM releases</a> on GitHub.</p>"""
     (out / "releases.html").write_text(page("Releases", "Current versions and tags of the macEM suite kits and MacEMUI.", body, "releases.html"))
 
 if __name__ == "__main__":

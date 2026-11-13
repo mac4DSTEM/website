@@ -2,7 +2,7 @@
 
 Source for [mac4dstem.com](https://mac4dstem.com), the website of the macEM suite: two free,
 native macOS applications for electron microscopy, [mac4DSTEM](https://github.com/macEMSuite/mac4DSTEM)
-(4D-STEM) and [macTEM](https://github.com/macEMSuite/macTEM) (TEM images, spectra and diffraction),
+(4D-STEM) and [macEM](https://github.com/macEMSuite/macEM) (TEM images, spectra and diffraction),
 and the six Swift kits they are built on.
 
 The site is static: **plain HTML, CSS, and vanilla JavaScript, with no build step,
