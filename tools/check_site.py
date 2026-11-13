@@ -19,7 +19,7 @@ from urllib.parse import urlsplit, unquote
 
 ROOT = Path(__file__).resolve().parents[1]
 ORG = "macEMSuite"
-APPS = {"mac4DSTEM": "index.html", "macTEM": "mactem/index.html"}
+APPS = {"mac4DSTEM": "index.html", "macEM": "mactem/index.html"}
 PACKAGES = ["FormatoKit", "ImagoKit", "DiffractoKit", "SpectroKit", "CuboKit", "SimulatoKit", "MacEMUI"]
 SKIP = {".git", "datacube", "tools"}
 # Apps whose website download reads an update feed, the feed's path in this repo, and the first version that reads it.
