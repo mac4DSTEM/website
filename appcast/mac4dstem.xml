@@ -9,7 +9,7 @@
       <sparkle:version>5.3.0</sparkle:version>
       <sparkle:shortVersionString>5.3.0</sparkle:shortVersionString>
       <sparkle:minimumSystemVersion>26.0</sparkle:minimumSystemVersion>
-      <sparkle:fullReleaseNotesLink>https://github.com/mac4DSTEM/mac4DSTEM/releases/tag/v5.3.0</sparkle:fullReleaseNotesLink>
+      <sparkle:fullReleaseNotesLink>https://github.com/macEMSuite/mac4DSTEM/releases/tag/v5.3.0</sparkle:fullReleaseNotesLink>
       <description sparkle:format="plain-text">Features
 
 * agent door pattern views: a cut of the pattern, the pattern without disk circles, raw counts around a pixel (#234) (3a4e3d5)
@@ -75,7 +75,7 @@ Bug Fixes
 * two files of one name (scan.h5, scan.dm4) never share or overwrite a session (#147) (7fe1205)
 * two sources of one stem never share or overwrite a session (7fe1205)
 * variant numbers do not depend on which equivalent matrix angle the matcher returns (#159) (7bcf0f2)</description>
-      <enclosure url="https://github.com/mac4DSTEM/mac4DSTEM/releases/download/v5.3.0/mac4DSTEM-5.3.0.dmg" type="application/octet-stream" sparkle:edSignature="yEi5GE1m9h4s2PTIH4E8V1OA27ut/jM6fU/75Q9IWsLsdTzstILVBvCqxEJvvOy1lwPrqfDXUA4sASRj8J5tAA==" length="19431784"/>
+      <enclosure url="https://github.com/macEMSuite/mac4DSTEM/releases/download/v5.3.0/mac4DSTEM-5.3.0.dmg" type="application/octet-stream" sparkle:edSignature="yEi5GE1m9h4s2PTIH4E8V1OA27ut/jM6fU/75Q9IWsLsdTzstILVBvCqxEJvvOy1lwPrqfDXUA4sASRj8J5tAA==" length="19431784"/>
     </item>
   </channel>
 </rss>

@@ -18,7 +18,7 @@ from pathlib import Path
 from urllib.parse import urlsplit, unquote
 
 ROOT = Path(__file__).resolve().parents[1]
-ORG = "mac4DSTEM"
+ORG = "macEMSuite"
 APPS = {"mac4DSTEM": "index.html", "macTEM": "mactem/index.html"}
 PACKAGES = ["FormatoKit", "ImagoKit", "DiffractoKit", "SpectroKit", "CuboKit", "SimulatoKit", "MacEMUI"]
 SKIP = {".git", "datacube", "tools"}
